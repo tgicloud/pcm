@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>PG_CamTest</title>
+	
+
+
+	<!-- Scripts -->
+	<script src="../../../../Desktop/PG_CamTest/app.js"></script>
+
+
+
+	<!-- Phonegap -->
+	<script src="phonegap.js"></script>
+	<script src="barcodescanner.js"></script>
+	<script>
+	function onLoad() {
+		console.log('onLoad');
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+	
+	function onDeviceReady() {
+		console.log('onDeviceReady');
+		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+		
+		scanner.scan(
+			function(result) {
+				alert("Scan Success!\n" +
+						"Text: "		+ result.text		+ "\n" +
+						"Format: "		+ result.format		+ "\n" +
+						"Cancelled?: "	+ result.cancelled);
+			},
+			
+			function(error) {
+				alert("Scan failed: " + error);
+			}
+		);
+	}
+	</script>
+
+
+
+
+
+</head>
+<body onload="onLoad()" style="background:#123456">
+	
+</body>
+</html>
