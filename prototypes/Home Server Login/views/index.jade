@@ -1,0 +1,43 @@
+!!! 5
+html
+  head
+    title  Login 
+    meta(charset='utf-8')
+    //
+       STYLESHEETS 
+    //
+       SCRIPTS 
+    script(type='text/javascript', src='scripts/jquery_1_8_2.js')
+    script(type='text/javascript', src='scripts/control.js')
+  body
+    #loginPage
+      form#derp
+        | Login:
+        input#userLogin(type='text')
+        br
+        | Password:
+        input#userPassword(type='password')
+        br
+        input#loginSubmit(type='button', value='Submit')
+    #adminPage
+      input.logoutButton(type='button', value='Logout')
+      br
+      br
+      table#userTable(style='border: 1px solid green;')
+        thead
+          tr
+            th Login
+            th Pass
+            th ID
+            th Name
+            th Status
+        tfoot
+        tbody
+    #userPage
+      input.logoutButton(type='button', value='Logout')
+      br
+      br
+      | Code:
+      input#codeInput(type='text')
+      input#codeSubmit(type='button', value='Submit')
+      br
