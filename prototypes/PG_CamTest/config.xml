@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget	xmlns		= "http://www.w3.org/ns/widgets"
+		xmlns:gap	= "http://phonegap.com/ns/1.0"
+		id			= "com.TGICloud.camTest"
+		version 	= "1.2.3">
+		
+		<name>PG_CamTest</name>
+		
+		<description>
+			Testing camera for QR scanning with Phonegap
+		</description>
+		
+		<author>
+			TGI
+		</author>
+		
+		<preference name="orientation"	value="portrait" />
+		<preference name="phonegap-version" value="2.9.0" />
+		
+		<gap:plugin name="com.phonegap.plugins.barcodescanner" />
+</widget>
