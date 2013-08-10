@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Durple</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+    <!-- JavaScript plugins (requires jQuery) -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+    <!--<script src="js/respond.js"></script>-->
+
+
+
+
+
+    <div class="navbar navbar-fixed-bottom navbar-inverse">
+        <a class="navbar-brand" href="">Welcome To Durple.com</a>
+
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#Home">Home</a></li>
+            <li><a href="#Criminals">Criminals</a></li>
+        </ul>
+
+        <p class="navbar-text pull-right">Signed in as <a href="" class="navbar-link">Detective Morrison</a></p>
+    </div>
+
+    <div class="accordion" id="criminalAccordion">
+        <div class="accordion-group">
+
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#criminalAccordion" href="#collapseOne">
+                    Apple
+                </a>
+            </div>
+
+            <div id="collapseOne" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <p>STUFF</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="accordion-group">
+
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#criminalAccordion" href="#collapseTwo">
+                    Banana
+                </a>
+            </div>
+
+            <div id="collapseTwo" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <p>More STUFF</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="dropdown">
+        <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+            Criminals<span class="caret"></span>
+        </button>
+        <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown trigger</a>-->
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+            <!--<li><a tabindex="-1" href="#">Apple</a></li>-->
+            <li><a tabindex="-1" data-toggle="modal" href="#appleModal">Apple</a></li>
+            <li><a tabindex="-1" href="">Banana action</a></li>
+            <li><a tabindex="-1" href="">Clementine</a></li>
+            <li class="divider"></li>
+            <li class="disabled"><a tabindex="-1" href="#">Doughnuts</a></li>
+        </ul>
+    </div>
+
+    <div class ="modal fade" id="appleModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                    <h4 class="modal-title">Apple</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="media">
+                        <a class="pull-left" href="">
+                            <img src="img/apple.png" class="media-object">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Tim Carney : Criminal ID# 487Jk6</h4>
+                            <p>Crimes: Murder; Theft; Super-Murder; Halitosis</p>
+                            <p>Last Known Location: The Walmart across the street</p>
+                            <p>Threat Level: 9842</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("a[href='#Home']").click(function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        $("a[href='#Criminals']").click(function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    </script>
+</body>
+</html>
