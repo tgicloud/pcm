@@ -17,8 +17,8 @@
             <form class="form-inline">
                 <a data-toggle="modal" href="#myModalNewMember" class="btn btn-primary navbar-btn btn-lg">New<br>Member</a>
                 <a data-toggle="modal" href="#myModalFindMember" class="btn btn-primary navbar-btn btn-lg">Find<br>Member</a>
-                <a data-toggle="modal" href="#myModalNewMember" class="btn btn-primary navbar-btn btn-lg">Check<br>In</a>
-                <a data-toggle="modal" href="#myModalNewMember" class="btn btn-primary navbar-btn btn-lg">Match<br>Play</a>
+                <a data-toggle="modal" href="#myModalCheckIn" class="btn btn-primary navbar-btn btn-lg">Check<br>In</a>
+                <a data-toggle="modal" href="#myModalMatchPlay" class="btn btn-primary navbar-btn btn-lg">Match<br>Play</a>
             </form>
         </div>
     </div>
@@ -32,7 +32,47 @@
                     <h4 class="modal-title">New Member</h4>
                 </div>
                 <div class="modal-body">
-                    New Member
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Tables</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Michael</td>
+                            <td>Are formatted like this</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Lucille</td>
+                            <td>Do you like them?</td>
+                        </tr>
+                        <tr class="success">
+                            <td>3</td>
+                            <td>Success</td>
+                            <td></td>
+                        </tr>
+                        <tr class="danger">
+                            <td>4</td>
+                            <td>Danger</td>
+                            <td></td>
+                        </tr>
+                        <tr class="warning">
+                            <td>5</td>
+                            <td>Warning</td>
+                            <td></td>
+                        </tr>
+                        <tr class="active">
+                            <td>6</td>
+                            <td>Active</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -50,7 +90,67 @@
                     <h4 class="modal-title">Find Member</h4>
                 </div>
                 <div class="modal-body">
-                    Find Member
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group has-warning">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group has-error">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group has-warning">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group has-error">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox">Remember me</label>
+                                </div>
+                                <button type="submit" class="btn btn-default">Sign in</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -68,7 +168,16 @@
                     <h4 class="modal-title">Check In</h4>
                 </div>
                 <div class="modal-body">
-                    Check In
+
+                    <div class="panel panel-default" id="images">
+                        <div class="panel-heading">Images
+                        </div>
+                        <p><img src="http://placehold.it/120x100" class="img-rounded">
+                            <img src="http://placehold.it/120x100" class="img-circle">
+                            <img src="http://placehold.it/120x100" class="img-thumbnail"></p>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -86,7 +195,9 @@
                     <h4 class="modal-title">Match Play</h4>
                 </div>
                 <div class="modal-body">
-                    Match Play
+                    <p><img src="http://placehold.it/120x100" class="img-rounded">
+                        <img src="http://placehold.it/120x100" class="img-circle">
+                        <img src="http://placehold.it/120x100" class="img-thumbnail"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
