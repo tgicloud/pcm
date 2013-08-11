@@ -17,14 +17,14 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- Be sure to leave the brand out there if you want it shown -->
-            <a class="navbar-brand" href="#">Club Membership</a>
+            <a class="navbar-brand" href="javascript:command('home')">Club Membership</a>
             <!-- Place everything within .nav-collapse to hide it until above 768px -->
-            <div class="nav-collapse collapse navbar-responsive-collapse">
+            <div id="navCollapse" class="nav-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">New Member</a></li>
-                    <li class="active"><a href="#">Check In</a></li>
-                    <li><a href="#">Match Play</a></li>
-                    <li><a href="#">View Member</a></li>
+                    <li id="newMemberNavBtn"><a href="javascript:command('newMember')">New Member</a></li>
+                    <li id="checkInNavBtn"><a href="javascript:command('checkIn')">Check In</a></li>
+                    <li id="matchPlayNavBtn"><a href="javascript:command('matchPlay')">Match Play</a></li>
+                    <li id="viewMemberNavBtn"><a href="javascript:command('viewMember')">View Member</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <span
                                 class="caret"></span></a>
@@ -47,14 +47,70 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default" id="homePanel">
+    <div class="panel" id="homePanel">
         <div class="panel-heading">Home</div>
         <div class="well well-large">Select function from menu above menu.<br><br>
             You are logged in as John Doe.<br><br>
             It's 2013. What else can I say?
         </div>
     </div>
-    <div style="display: none;" class="panel panel-default" id="loginPanel">
+    <div style="display: none;" class="panel" id="newMemberPanel">
+        <div class="panel-heading">New Member</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="txtName" class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="txtName" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtAddress" class="col-lg-2 control-label">Address</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="txtAddress" placeholder="Address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtCity" class="col-lg-2 control-label">City</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="txtCity" placeholder="City">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtState" class="col-lg-2 control-label">State</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="txtState" placeholder="State">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtZip" class="col-lg-2 control-label">Zip</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="txtZip" placeholder="Zip">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <button type="submit" class="btn btn-default">Done</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="display: none;" class="panel" id="checkInPanel">
+        <div class="panel-heading">Check In</div>
+    </div>
+    <div style="display: none;" class="panel" id="matchPlayPanel">
+        <div class="panel-heading">Match Play</div>
+    </div>
+    <div style="display: none;" class="panel" id="viewMemberPanel">
+        <div class="panel-heading">View Member</div>
+        <img src="img/Alfred_e_newman.jpg" class="img-responsive" alt="Responsive image">
+        <address>
+            <strong>Twitter, Inc.</strong><br>
+            795 Folsom Ave, Suite 600<br>
+            San Francisco, CA 94107<br>
+            <abbr title="Phone">P:</abbr> (123) 456-7890
+        </address>
+    </div>
+    <div style="display: none;" class="panel" id="loginPanel">
         <div class="panel-heading">Login</div>
         <form>
             <fieldset>
@@ -72,7 +128,8 @@
         </form>
     </div>
 </div>
-<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="Navigator2.js"></script>
 </body>
 </html>
