@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navigator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<div class="container">
+    <div class="navbar navbar-inverse" id="navbar">
+        <div class="container">
+            <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Be sure to leave the brand out there if you want it shown -->
+            <a class="navbar-brand" href="#">Club Membership</a>
+            <!-- Place everything within .nav-collapse to hide it until above 768px -->
+            <div class="nav-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">New Member</a></li>
+                    <li class="active"><a href="#">Check In</a></li>
+                    <li><a href="#">Match Play</a></li>
+                    <li><a href="#">View Member</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">We</a></li>
+                            <li><a href="#">Don't</a></li>
+                            <li><a href="#">Need</a></li>
+                            <li><a href="#">No</a></li>
+                            <li><a href="#">Stinkin</a></li>
+                            <li><a href="#">Options</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">John Doe <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" id="homePanel">
+        <div class="panel-heading">Home</div>
+        <div class="well well-large">Select function from menu above menu.<br><br>
+            You are logged in as John Doe.<br><br>
+            It's 2013. What else can I say?
+        </div>
+    </div>
+    <div style="display: none;" class="panel panel-default" id="loginPanel">
+        <div class="panel-heading">Login</div>
+        <form>
+            <fieldset>
+                <legend>Login required to proceed</legend>
+                <div class="form-group">
+                    <label for="txtUserLogin">User Login</label>
+                    <input type="text" class="form-control" id="txtUserLogin" placeholder="Enter login">
+                </div>
+                <div class="form-group">
+                    <label for="txtUserPassword">Password</label>
+                    <input type="password" class="form-control" id="txtUserPassword" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
