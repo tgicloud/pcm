@@ -6,6 +6,7 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <script src="js/jquery.js"></script>
+    <script src="js/qrcode.js"></script>
 </head>
 <body>
     <!-- JavaScript plugins (requires jQuery) -->
@@ -66,7 +67,7 @@
         </div>
     </div>
 
-
+    <div id="qrA" style="width:200px; height:200px; margin: 15px 15px 15px 15px"></div>
 
 
 
@@ -127,6 +128,14 @@
             e.preventDefault();
             $(this).tab('show');
         });
+
+
+        //some QR
+        var qrA = new QRCode(document.getElementById("qrA"), {
+            width: 200,
+            height: 200
+        });
+        qrA.makeCode("My name is Bob and I am made of cheese.")
     </script>
 </body>
 </html>
