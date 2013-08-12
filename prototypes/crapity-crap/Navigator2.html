@@ -24,18 +24,11 @@
             <!--<a class="navbar-brand visible-sm" href="javascript:command('home')">CM</a>-->
             <a class="navbar-brand hidden-sm" href="javascript:command('home')">Club Membership</a>
 
-            <button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-user"><span class="glyphicon glyphicon-plus"></span></button>
-            <button type="button" onclick="command('checkIn')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-user"><span class="glyphicon glyphicon-ok"></span></button>
-            <button type="button" onclick="command('matchPlay')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-user"><span class="glyphicon glyphicon-resize-small"></span></button>
-            <button type="button" onclick="command('viewMember')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-user"><span class="glyphicon glyphicon-search"></span></button>
-            <button type="button" onclick="alert('You are out of options.')" class="btn-primary btn-cell-right visible-sm"><span class="glyphicon the-icons glyphicon-cog"></span></button>
-
-            <!--<ul class="nav nav-pills visible-sm">-->
-                <!--<li id="newMemberNavBtnCell"><a href="javascript:command('newMember')">NM</a></li>-->
-                <!--<li id="checkInNavBtnCell"><a href="javascript:command('checkIn')">CI</a></li>-->
-                <!--<li id="matchPlayNavBtnCell"><a href="javascript:command('matchPlay')">MP</a></li>-->
-                <!--<li id="viewMemberNavBtnCell"><a href="javascript:command('viewMember')">VM</a></li>-->
-            <!--</ul>-->
+            <button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-plus"></span></button>
+            <button type="button" onclick="command('checkIn')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-ok"></span></button>
+            <button type="button" onclick="command('matchPlay')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-resize-small"></span></button>
+            <button type="button" onclick="command('viewMember')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-user"></span></button>
+            <button type="button" onclick="command('optionsMenu')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-cog"></span></button>
 
             <!-- Place everything within .nav-collapse to hide it until above 768px -->
             <div id="navCollapse" class="nav-collapse collapse navbar-responsive-collapse">
@@ -365,6 +358,31 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </fieldset>
         </form>
+    </div>
+    <div style="display: none;" class="panel" id="optionsMenuPanel">
+        <div class="panel-heading">Options</div>
+
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+        <button type="button" onclick="command('home')" class="btn btn-default btn-lg btn-block">You are out of options</button>
+
     </div>
 </div>
 <script src="js/jquery-1.10.2.min.js"></script>
