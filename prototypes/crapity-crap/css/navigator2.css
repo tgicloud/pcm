@@ -3,8 +3,17 @@
  * Special styles for presenting Bootstrap's documentation and code examples.
  */
 
-
-
+.the-icons {
+    /*padding: 40px 10px;*/
+    font-size: 20px;
+    /*line-height: 2;*/
+    /*color: #333;*/
+    /*text-align: center;*/
+}
+.the-icons .glyphicon {
+    /*padding-left: 15px;*/
+    /*padding-right: 15px;*/
+}
 
 .btn-cell {
     position: relative;
@@ -19,6 +28,22 @@
     border: 1px solid #4f4f4f;
     border-radius: 9px;
 }
+
+.btn-cell-right {
+    position: relative;
+    float:right;
+    width: 64;
+    height: 34px;
+    padding: 6px 12px;
+    margin-top: 8px;
+    margin-right: 8px;
+    /*margin-bottom: 8px;*/
+    /*background-color: transparent;*/
+    border: 1px solid #4f4f4f;
+    border-radius: 9px;
+}
+
+
 
 
 /* Key scaffolding
