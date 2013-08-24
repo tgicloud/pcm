@@ -4,7 +4,8 @@ pcm
 Private Club Membership
 
 * Use prototypes folder for fucking around
-
+for images see:
+http://blog.marcon.me/post/31143865164/send-images-through-websockets
 
 
 * appendChild

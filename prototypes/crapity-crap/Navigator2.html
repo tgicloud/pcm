@@ -12,18 +12,7 @@
 <div class="container">
     <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" id="navbar">
         <div class="container">
-            <!--&lt;!&ndash; .navbar-toggle is used as the toggle for collapsed navbar content &ndash;&gt;-->
-            <!--<button type="button" class="navbar-toggle" data-toggle="collapse"-->
-                    <!--data-target=".navbar-responsive-collapse">-->
-                <!--<span class="icon-bar"></span>-->
-                <!--<span class="icon-bar"></span>-->
-                <!--<span class="icon-bar"></span>-->
-            <!--</button>-->
-
-            <!-- Be sure to leave the brand out there if you want it shown -->
-            <!--<a class="navbar-brand visible-sm" href="javascript:command('home')">CM</a>-->
             <a class="navbar-brand hidden-sm" href="javascript:command('home')">Club Membership</a>
-
             <button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-plus"></span></button>
             <button type="button" onclick="command('checkIn')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-ok"></span></button>
             <button type="button" onclick="command('matchPlay')" class="btn-primary btn-cell visible-sm"><span class="glyphicon the-icons glyphicon-resize-small"></span></button>
@@ -33,13 +22,12 @@
             <!-- Place everything within .nav-collapse to hide it until above 768px -->
             <div id="navCollapse" class="nav-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <li id="newMemberNavBtn"><a href="javascript:command('newMember')">New Member</a></li>
-                    <li id="checkInNavBtn"><a href="javascript:command('checkIn')">Check In</a></li>
-                    <li id="matchPlayNavBtn"><a href="javascript:command('matchPlay')">Match Play</a></li>
-                    <li id="viewMemberNavBtn"><a href="javascript:command('viewMember')">View Member</a></li>
+                    <li id="newMemberNavBtn"><a href="javascript:command('newMember')"><span class="glyphicon glyphicon-plus"></span> New Member</a></li>
+                    <li id="checkInNavBtn"><a href="javascript:command('checkIn')"><span class="glyphicon glyphicon-ok"> Check In</span></a></li>
+                    <li id="matchPlayNavBtn"><a href="javascript:command('matchPlay')"><span class="glyphicon glyphicon-resize-small"> Match Play</span></a></li>
+                    <li id="viewMemberNavBtn"><a href="javascript:command('viewMember')"><span class="glyphicon glyphicon-user"> View Member</span></a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <span
-                                class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"> Options</span><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">We</a></li>
                             <li><a href="#">Don't</a></li>
@@ -49,19 +37,22 @@
                             <li><a href="#">Options</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">John Doe <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
 
 
     </div>
-    <div class="panel" id="homePanel">
+
+    <!-- Add a gap below navbar if not small view -->
+    <br class="hidden-sm">
+
+    <div style="display: none; margin-bottom: 4px;" class="alert alert-danger" id="alertDangerDiv">
+        <button type="button" onclick="$('#alertDangerDiv').hide()" class="close" aria-hidden="true">&times;</button>
+        <h4 id="alertDangerText" style="margin: 0px; padding: 0px;">UNKNOWN ERROR</h4>
+    </div>
+
+    <div style="display: none;" class="panel" id="homePanel">
         <div class="panel-heading">Home</div>
         <div class="well well-large">Select function from menu above menu.<br><br>
             You are logged in as John Doe.<br><br>
@@ -111,53 +102,174 @@
                 <div class="col-lg-offset-2 col-lg-10">
                     <button type="button" onclick="command('home') "class="btn btn-primary">SAVE</button>
                     <button type="button" onclick="command('home') "class="btn ">CANCEL</button>
-
                     <!--<button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm">NEW</button>-->
-
-
-
                 </div>
             </div>
         </form>
     </div>
+
+    <div style="display: none;" class="panel" id="logInPanel">
+        <div class="panel-heading" >Please sign in</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="txtLogin" class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="txtLogin" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtPassword" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" id="txtPassword" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <button type="button" onclick="login()" class="btn btn-primary">SIGN IN</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
     <div style="display: none;" class="panel" id="checkInPanel">
         <div class="panel-heading">Check In</div>
+        <div class="form-horizontal">
 
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr onclick="login()">
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                </tbody>
+            </table>
 
-        <h3>Test case</h3>
-        <p>Resize your browser or load on different devices to test the responsive utility classes.</p>
-        <h4>Visible on...</h4>
-        <p>Green checkmarks indicate the element <strong>is visible</strong> in your current viewport.</p>
-        <ul class="responsive-utilities-test visible-on">
-            <li>
-                <span class="hidden-sm">Small</span>
-                <span class="visible-sm">&#10004; Visible on small</span>
-            </li>
-            <li>
-                <span class="hidden-md">Medium</span>
-                <span class="visible-md">&#10004; Visible on medium</span>
-            </li>
-            <li>
-                <span class="hidden-lg">Large</span>
-                <span class="visible-lg">&#10004; Visible on large</span>
-            </li>
-        </ul>
-        <h4>Hidden on...</h4>
-        <p>Here, green checkmarks indicate the element <strong>is hidden</strong> in your current viewport.</p>
-        <ul class="responsive-utilities-test hidden-on">
-            <li>
-                <span class="visible-sm">Small</span>
-                <span class="hidden-sm">&#10004; Hidden on small</span>
-            </li>
-            <li>
-                <span class="visible-md">Medium</span>
-                <span class="hidden-md">&#10004; Hidden on medium</span>
-            </li>
-            <li>
-                <span class="visible-lg">Large</span>
-                <span class="hidden-lg">&#10004; Hidden on large</span>
-            </li>
-        </ul>
+        </div><!-- /example -->
 
 
     </div>
