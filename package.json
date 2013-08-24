@@ -1,0 +1,20 @@
+{
+  "name": "pcm",
+  "version": "0.0.1",
+  "author": "Sean Smith",
+  "description": "Private Club Membership",
+  "contributors": [
+    {
+      "name": "Sean Smith",
+      "email": "dremoor@gmail.com"
+    }
+  ],
+  "dependencies" : {
+    "connect": "*",
+    "mongodb": "*",
+    "socket.io": "*"
+  },
+  "engines": {
+    "node": ">=0.6.6"
+  }
+}
