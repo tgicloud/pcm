@@ -7,12 +7,16 @@ var pcm = {};
 pcm.lastPanelShown = "loadingPanel";
 pcm.userID = null;
 
+// -------------------------------------------------------------------------------------------------------------------
 // Entry point when document ready
+// -------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
   loadStore();
 });
 
+// -------------------------------------------------------------------------------------------------------------------
 // Load the host store
+// -------------------------------------------------------------------------------------------------------------------
 function loadStore() {
   switchToPanel("loadingPanel", false)
 
@@ -20,9 +24,10 @@ function loadStore() {
   var storeLoadCallback = function (success) {
     clearInterval(storeWatchdog);
     if (success) {
-      switchToPanel("logInPanel", false)
+//      switchToPanel("logInPanel", false);
+      switchToPanel("newMemberPanel", false);
     } else {
-      switchToPanel("loadErrorPanel", false)
+      switchToPanel("loadErrorPanel", false);
     }
   };
 
@@ -46,7 +51,9 @@ function loadStore() {
 
 }
 
+// -------------------------------------------------------------------------------------------------------------------
 // Login
+// -------------------------------------------------------------------------------------------------------------------
 function login() {
 
   // Get from html input controls
@@ -73,29 +80,18 @@ function login() {
 //  });
 
   // Search store for user
-  var loginModel = new Login();
-//  loginModel.set('name', loginText);
-//  loginModel.set('password', passwordText);
-  var loginList = new List(loginModel);
-
+  var loginList = new List(new Login());
   pcm.hostStore.getList(loginList, {name:loginText, password:passwordText}, function (list, error) {
     if (typeof error != 'undefined') {
       alertDanger('Error: ' + error);
       return;
     }
-
     if (list.length() <1) {
       alertDanger('login failed');
       return;
     }
-
     pcm.userID = true;
     command('home');
   });
-
-
-
-
-
 }
 
