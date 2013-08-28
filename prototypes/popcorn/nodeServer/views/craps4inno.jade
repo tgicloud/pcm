@@ -1,0 +1,790 @@
+!!! 5
+html
+  head
+    title  Craps 
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='stylesheets/main.css')
+    script(type='text/javascript', src='http://code.jquery.com/jquery-1.8.2.min.js')
+    script(type='text/javascript', src='javascript/control.js')
+  body
+    .workspace
+      .table
+        //
+           Pass 
+        #Pass.bet
+          .title 	Pass	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Pass 
+        //
+           Don't Pass 
+        #DontPass.bet
+          .title  Don't Pass	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Don't Pass 
+        //
+           Field Middle 
+        #FieldMid.bet
+          .title  Field 3 4 9 10 11	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Field Middle
+        //
+           Field Edges 
+        #FieldEdge.bet
+          .title  Field 2 12	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of FieldEdge
+        //
+           Proposition Craps 
+        #PropCraps.bet
+          .title  Proposition: Craps	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Proposition Craps
+        //
+           Proposition Any Seven 
+        #Prop7.bet
+          .title  Proposition: Any Seven	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Propositon Any Seven
+        //
+           Proposition Eleven 
+        #Prop11.bet
+          .title  Proposition: Eleven	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Proposition Eleven
+        //
+           Propositon 3 
+        #Prop3.bet
+          .title  Proposition: 3 Ace-Deuce	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Proposition
+        //
+           Propposition 2 
+        #Prop2.bet
+          .title  Proposition: 2 Snake Eyes	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Propposition 2
+        //
+           Proposition 12 
+        #Prop12.bet
+          .title  Proposition: 12 Box Cars	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Proposition 12
+        //
+           Free Odds 4 
+        #FreeOdd4.bet
+          .title  Free Odds on Pass Line 4	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Free Odds 4
+        //
+           Free Odds 5 
+        #FreeOdd5.bet
+          .title  Free Odds on Pass Line 5	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Free Odds 5
+        //
+           Free Odds 6 
+        #FreeOdd6.bet
+          .title  Free Odds on Pass Line 6	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Free Odds 6
+        //
+           Free Odds 8 
+        #FreeOdd8.bet
+          .title  Free Odds on Pass Line 8	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Free Odds 8
+        //
+           Free Odds 9 
+        #FreeOdd9.bet
+          .title  Free Odds on Pass Line 9	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Free Odds 9
+        //
+           Free Odds 10 
+        #FreeOdd10.bet
+          .title  Free Odds on Pass Line 10	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Free Odds 10
+        //
+           Hardway 4 
+        #Hard4.bet
+          .title  Hardway 4	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Hardway 4
+        //
+           Hardway 6 
+        #Hard6.bet
+          .title  Hardway 6	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Hardway 6
+        //
+           Hardway 8 
+        #Hard8.bet
+          .title  Hardway 8	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Hardway 8
+        //
+           Hardway 10 
+        #Hard10.bet
+          .title  Hardway 10	
+          div(style='background: black; height: 1%; width: 100%;')
+          .amount  0				
+          div(style='background: black; height: 1%; width: 100%;')
+          div(style='height: 3%; width: 100%;')
+          .CS_Container(style='height: 40%;')
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Hardway 10
+      .sidePanel
+        #creditDisplay.creditDisplay
+          .CD_Title CASH
+          div(style='height: 10px;')
+          #CD_Amount.CD_Amount 5000
+        #puckDisplay.puckDisplay
+          div(style='height: 30px;')
+          #puckStatus  OFF 
+          #puckNumber
+        #rollDisplay.rollDisplay
+          #rollButton.rollButton ROLL THE DICE!
+          div(style='float: left; height: 100%; width: 5%; background: black;')
+          div(style='float: left; height: 100%; width: 45%;')
+            #die1.die  X 
+            div(style='height: 5%; width: 100%; background: black;')
+            #die2.die  X 
+        #creditAdder.creditAdder
+          div(style='height: 5px;')
+          | $

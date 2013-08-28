@@ -1,0 +1,111 @@
+!!! 5
+html
+  head
+    title  Craps 
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='stylesheets/main.css')
+    script(type='text/javascript', src='http://code.jquery.com/jquery-1.8.2.min.js')
+    script(type='text/javascript', src='javascript/control.js')
+  body
+    .workspace
+      .table
+        //
+           Pass 
+        #Pass.field
+          .title 	Pass	
+          .amount 	0		
+          div(style='height: 40%;')
+            //
+               CS container 
+            //
+               $1 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  1 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $5 
+            .creditSelector
+              .csPlus  + 
+              .csDisplay  5 
+              .csMinus  - 
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $25 
+            .creditSelector
+              .csPlus  +  
+              .csDisplay  25 
+              .csMinus  -  
+            div(style='height: 100%; width: 2%; float: left;')
+            //
+               $100 
+            .creditSelector
+              .csPlus  +   
+              .csDisplay  100 
+              .csMinus  -   
+        //
+           end of Pass 
+        //
+           Don't Pass 
+        #DontPass.field
+        //
+           end of Don't Pass 
+        .testButton
+          font(color='white', size='10px') C
+        .testButton
+          font(color='white', size='10px') D
+        .testButton
+          font(color='white', size='10px') E
+        .testButton
+          font(color='white', size='10px') F
+        .testButton
+          font(color='white', size='10px') G
+        .testButton
+          font(color='white', size='10px') H
+        .testButton
+          font(color='white', size='10px') I
+        .testButton
+          font(color='white', size='10px') J
+        .testButton
+          font(color='white', size='10px') K
+        .testButton
+          font(color='white', size='10px') L
+        .testButton
+          font(color='white', size='10px') M
+        .testButton
+          font(color='white', size='10px') N
+        .testButton
+          font(color='white', size='10px') O
+        .testButton
+          font(color='white', size='10px') P
+        .testButton
+          font(color='white', size='10px') Q
+        .testButton
+          font(color='white', size='10px') R
+        .testButton
+          font(color='white', size='10px') S
+        .tableItem
+          div(style='height: 30%; color: white; text-align: center; font: 1.6em arial,sans-serif;')  T 
+          #CD_T(style='height: 25%; color: white; text-align: center; font: 1.6em arial,sans-serif;')  0 
+          div(style='height: 5%;')
+          div(style='height: 40%;')
+            div(style='height: 100%; width: 23.5%; float: left;')
+              #CS_T_P1(style='height: 30%; background: #aa0000; color: white; text-align: center; font: 1.4em arial,sans-serif;')   +  
+              #abcde(style='height: 40%; background: #00aa00; color: black; text-align: center; font: 1.4em arial,sans-serif;')  $1 
+              #CS_T_M1(style='height: 30%; background: #aa0000; color: white; text-align: center; font: 1.4em arial,sans-serif;')   -  
+            div(style='height: 100%; width: 2%; float: left;')
+            div(style='height: 100%; width: 23.5%; float: left; background: #abcdef;')
+            div(style='height: 100%; width: 2%; float: left;')
+            div(style='height: 100%; width: 23.5%; float: left; background: #faaffa;')
+            div(style='height: 100%; width: 2%; float: left;')
+            div(style='height: 100%; width: 23.5%; float: left; background: #fedcba;')
+      .control
+        .creditDisplay
+          font#CD_Font(color='white') X
+        //
+           End of Credit Display 
+        #rollButton.rollButtonNone
+          font(color='white', size='5px') Roll Button
+        #rollDisplay(style='width: 150px; height: 150px; margin: 0px 10px 0px 10px; position: relative; top: 9px; background: #333333;')
+          font#RD_Font(color='white', size='5px')  Dice rolling animation 

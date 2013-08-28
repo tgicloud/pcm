@@ -1,0 +1,229 @@
+
+/* Tests */
+
+.testButton
+{
+	margin:			6px 6px 6px 6px;
+	outline:		0px solid black;
+	border:			0px solid black;
+	padding:		0px 0px 0px 0px;
+	height:			180px;
+	width:			220px;
+	
+	float:			left;
+	
+	border-radius:	0px;
+	background:		#333333;
+}
+
+.exampleButton
+{
+	margin:			10px 10px 10px 10px;
+	outline:		red solid 1px;
+	border:			5px outset gray;
+	padding:		10px 10px 10px 10px;
+	height:			100px;
+	width:			100px;
+	
+	border-radius:	10px;
+	background:		#eeeeee;
+	
+	box-shadow:		0px 1px 2px #dddddd;
+}
+
+.table
+{
+	height:		100%;
+	width:		85%;
+	float:		left;
+	
+	background:	#a1f1d2;
+}
+
+.control
+{
+	height:		100%;
+	width:		15%;
+	float:		left;
+	
+	background:	#d2a1f1;
+}
+
+.workspace
+{
+	width:		1366px;
+	height:		768px;
+	margin:		auto;
+	
+	background: #ffffff;
+	
+}
+
+
+
+
+/* Actual Stuff */
+
+body
+{
+	background: #121212;
+}
+
+
+
+
+.tableItem
+{
+	margin:			6px 6px 6px 6px;
+	outline:		0px solid black;
+	border:			0px solid black;
+	padding:		0px 0px 0px 0px;
+	height:			180px;
+	width:			220px;
+	
+	float:			left;
+	
+	border-radius:	0px;
+	background:		#333333;
+}
+
+.creditDisplay
+{
+	margin:		0px 10px 0px 10px;
+	outline:	;
+	border:		;
+	padding:	;
+	height:		150px;
+	width:		150px;
+	
+	/*float:		left;*/
+	position:	relative;
+	top:		9px;
+	
+	background:	#333333;
+}
+/*		Field		*/
+.field {
+	margin:			6px 6px 6px 6px;
+	outline:		0px solid black;
+	border:			0px solid black;
+	padding:		0px 0px 0px 0px;
+	height:			180px;
+	width:			220px;
+	
+	float:			left;
+	
+	border-radius:	10px;
+	background:		#333333;
+}
+.title {
+	height:			30%;
+	color:			white;
+	text-align:		center;
+	font:			1.6em arial,sans-serif;
+}
+.amount {
+	height:			30%;
+	color:			white;
+	text-align:		center;
+	font:			1.6em arial,sans-serif;
+}
+
+/*		Credit Selector		*/
+.creditSelector {
+	height:	100%;
+	width:	23.5%;
+	float:	left;
+}
+.csPlus {
+	height:			30%;
+	
+	color:			white;
+	text-align:		center;
+	font:			1.4em arial,sans-serif;
+	
+	background:		#bb0000;
+	border-radius:	10px 10px 0px 0px;
+}
+.csDisplay {
+	height:			40%;
+	
+	color:			white;
+	text-align:		center;
+	font:			1.4em arial,sans-serif;
+	
+	background:		#330000;
+}
+.csMinus {
+	height:			30%;
+	
+	color:			white;
+	text-align:		center;
+	font:			1.4em arial,sans-serif;
+	
+	background:		#bb0000;
+	border-radius:	0px 0px 10px 10px;
+}
+
+.csHover {
+	background:		#dd0000;
+}
+.csDown {
+	background:		#990000;
+}
+
+/*		Roll Button		*/
+.rollButtonNone {
+	margin:		0px 10px 0px 10px;
+	outline:	0px solid black;
+	border:		0px solid black;
+	padding:	0px 0px 0px 0px;
+	height:		150px;
+	width:		150px;
+	
+	/*float:		right;*/
+	position:	relative;
+	top:		9px;
+	
+	background:	#333333;
+}
+.rollButtonOver {
+	margin:		0px 10px 0px 10px;
+	outline:	0px solid black;
+	border:		0px solid black;
+	padding:	0px 0px 0px 0px;
+	height:		150px;
+	width:		150px;
+	
+	/*float:		right;*/
+	position:	relative;
+	top:		9px;
+	
+	background:	#444444;
+}
+.rollButtonDown {
+	margin:		0px 10px 0px 10px;
+	outline:	0px solid black;
+	border:		0px solid black;
+	padding:	0px 0px 0px 0px;
+	height:		150px;
+	width:		150px;
+	
+	/*float:		right;*/
+	position:	relative;
+	top:		9px;
+	
+	background:	#202020;
+}
+
+
+
+
+
+
+
+
+
+
+
+

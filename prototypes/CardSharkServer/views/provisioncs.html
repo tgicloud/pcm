@@ -1,0 +1,63 @@
+
+<!DOCTYPE HTML>
+
+<html style="font: 1.2em arial,sans-serif;">
+	<head>
+		<title> Login </title>
+		<meta charset="utf-8">
+		
+		<!-- STYLESHEETS -->
+		
+		
+		<!-- SCRIPTS -->
+		<script type="text/javascript" src="scripts/jquery_1_8_2.js"></script>
+		<script type="text/javascript" src="scripts/control.js"></script>
+		<!--<script type="text/javascript" src="../public/provision/scripts/jquery_1_8_2.js"></script>
+		<script type="text/javascript" src="../public/provision/scripts/control.js"></script>-->
+		
+	</head>
+	
+	<body>
+		<div id="loginPage">
+			<form id="derp">
+				Login:		<input id="userLogin" type="text"><br>
+				Password:	<input id="userPassword" type="password"><br>
+				<input id="loginSubmit" type="button" value="Submit">
+			</form>
+		</div>
+		
+		<div id="adminPage">
+			<input class="logoutButton" type="button" value="Logout"><br><br>
+			<table id="userTable" style="border: 1px solid green">
+				<thead>
+				<tr>
+					<th>Login</th>
+					<th>Pass</th>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Status</th>
+				</tr>
+				</thead>
+				
+				<tfoot>
+				</tfoot>
+				
+				<tbody>
+				</tbody>
+				
+			</table>
+		</div>
+		
+		<div id="userPage">
+			<input class="logoutButton" type="button" value="Logout"><br><br>
+			<form>
+				<input type="radio" name="time" value="15"> 15 <br>
+				<input type="radio" name="time" value="30"> 30 <br>
+				<input type="radio" name="time" value="45"> 45 <br>
+				<input type="radio" name="time" value="60"> 60 <br>
+			</form>
+			Code: <input id="codeInput" type="text">
+			<input id="codeSubmit" type="button" value="Submit"><br>
+		</div>
+	</body>
+</html>

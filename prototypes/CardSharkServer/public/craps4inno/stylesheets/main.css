@@ -1,0 +1,272 @@
+
+/* Tests */
+
+.exampleButton
+{
+	margin:			10px 10px 10px 10px;
+	outline:		red solid 1px;
+	border:			5px outset gray;
+	padding:		10px 10px 10px 10px;
+	height:			100px;
+	width:			100px;
+	
+	border-radius:	10px;
+	background:		#eeeeee;
+	
+	box-shadow:		0px 1px 2px #dddddd;
+}
+
+
+
+
+
+
+
+body
+{
+	background: #121212;
+}
+
+
+
+
+
+/*			Containers!!!			*/
+.workspace {
+	width:	1366px;
+	height:	768px;
+	margin:	auto;
+}
+.table {
+	height:	100%;
+	width:	85%;
+	float:	left;
+}
+.sidePanel {
+	height:		100%;
+	width:		15%;
+	float:		left;
+	
+	border-radius:	10px;
+	background:		#114477;
+}
+
+
+
+
+
+/*				Bets				*/
+.bet {
+	margin:			6px 6px 6px 6px;
+	outline:		0px solid black;
+	border:			0px solid black;
+	padding:		0px 0px 0px 0px;
+	height:			180px;
+	width:			220px;
+	
+	float:			left;
+	
+	border-radius:	10px;
+	background:		#333333;
+}
+.title {
+	height:			35%;
+	color:			white;
+	text-align:		center;
+	font:			1.6em arial,sans-serif;
+}
+.amount {
+	height:			20%;
+	color:			white;
+	text-align:		center;
+	font:			1.6em arial,sans-serif;
+	
+	background: #222222;
+}
+
+.win {
+	margin:	0px 0px 0px 0px;
+	border:	6px solid Green;
+}
+.lose {
+	margin:	0px 0px 0px 0px;
+	border:	6px solid Red;
+}
+
+
+.creditSelector {
+	height:	100%;
+	width:	23.5%;
+	float:	left;
+}
+.csPlus {
+	height:			30%;
+	
+	color:			white;
+	text-align:		center;
+	font:			1.4em arial,sans-serif;
+	
+	background:		#003377;
+	border-radius:	10px 10px 0px 0px;
+}
+.csDisplay {
+	height:			40%;
+	
+	color:			white;
+	text-align:		center;
+	font:			1.4em arial,sans-serif;
+	
+	background:		#000022;
+}
+.csMinus {
+	height:			30%;
+	
+	color:			white;
+	text-align:		center;
+	font:			1.4em arial,sans-serif;
+	
+	background:		#003377;
+	border-radius:	0px 0px 10px 10px;
+}
+
+.csHover {
+	background:		#dd0000;
+}
+.csDown {
+	background:		#990000;
+}
+
+
+
+
+
+/*			Credit Display			*/
+.creditDisplay {
+	margin:	10px;
+	height:	100px;
+	width:	185px;
+	
+	border-radius:	10px;
+	background:		#333333;
+}
+
+.CD_Title {
+	color:				white;
+	text-align:			center;
+	text-decoration: 	underline;
+	font:				2.0em arial,sans-serif
+}
+.CD_Amount {
+	color:		white;
+	text-align:	center;
+	font:		2.2em arial,sans-serif
+}
+
+.creditAdder {
+	margin:	5px;
+	height:	50px;
+	width:	50px;
+	
+	float:	left;
+	
+	border-radius:	10px;
+	background:		#333333;
+	
+	color:		green;
+	text-align:	center;
+	font:		2.0em arial,sans-serif;
+}
+.clearBets {
+	margin:	5px;
+	height:	50px;
+	width:	50px;
+	
+	float:	left;
+	
+	border-radius:	10px;
+	background:		#333333;
+	
+	color:		red;
+	text-align:	center;
+	font:		2.0em arial,sans-serif;
+}
+
+
+
+/*			Roll Display			*/
+.rollDisplay {
+	margin:	10px;
+	height: 100px;
+	width:	185px;
+	
+	border-radius:	10px;
+	background:		#333333;
+}
+
+.rollButton {
+	height:	100%;
+	width:	50%;
+	
+	float:			left;
+	border-radius:	10px 0px 0px 10px;
+	
+	color:		white;
+	text-align:	center;
+	font:		1.6em arial,sans-serif
+}
+.RB_over {
+	background:	#444444;
+}
+.RB_down {
+	background:	#202020;
+}
+
+.die {
+	height:	47.5%;
+	width:	100%;
+	
+	color:		white;
+	text-align:	center;
+	font:		2.0em arial,sans-serif;
+}
+
+
+
+
+
+/*			Puck Display			*/
+.puckDisplay {
+	margin:	10px;
+	height:	185px;
+	width:	185px;
+	
+	border-radius:	100px;
+	
+	text-align:	center;
+	font:		3.0em arial,sans-serif;
+}
+
+.puckON {
+	background:	white;
+	color:		black;
+}
+.puckOFF {
+	background:	black;
+	color:		white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
