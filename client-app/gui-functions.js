@@ -38,6 +38,20 @@ function alertDanger(text) {
 }
 
 // -------------------------------------------------------------------------------------------------------------------
+// OK / Cancel modal
+// -------------------------------------------------------------------------------------------------------------------
+function OKCancel(text, callback) {
+  pcm.callbackOKCancel = callback;
+  $('#modalBody').html(text);
+  $('#myModal').modal('show');
+}
+
+function OKCancel_OK() {
+  $('#myModal').modal('hide');
+  pcm.callbackOKCancel();
+}
+
+// -------------------------------------------------------------------------------------------------------------------
 // Execute commands
 // -------------------------------------------------------------------------------------------------------------------
 function command(cmd) {
@@ -45,13 +59,35 @@ function command(cmd) {
 }
 
 
-//  $('#' + pcm.lastPanelShown).show();
-//  $('#navbar').show();
-//  alertDanger('BULLSHIT');
-//  $('body').animate({ backgroundColor: "white" }, "slow");
-// Remove loading screen
-//  $('#' + pcm.lastPanelShown).hide();
-//  $('body').css('background-color', 'white');
-//  $('body').animate("{background-color:white}");
-//  $("body").animate({ backgroundColor: "#000000" }, 10000);
+// -------------------------------------------------------------------------------------------------------------------
+// Take Photo
+// -------------------------------------------------------------------------------------------------------------------
+function TakePhoto(callback) {
+  $("#picError").hide();
+  pcm.callbackTakePhoto = callback;
+  pcm.streamTakePhone = null;
+  var video = document.querySelector("#videoElement");
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+  navigator.getUserMedia({video: true}, function (stream) {
+    pcm.streamTakePhone = stream;
+    video.src = window.URL.createObjectURL(stream);
+  }, function (err) {
+    alertDanger('cam error: ' + err.name);
+    $('#myCamModal').modal('hide');
+  });
+  $('#myCamModal').modal('show');
+}
+function TakePhoto_Snap() {
 
+  if (!pcm.streamTakePhone) {
+    $("#picError").show();
+    return;
+  }
+
+  $('#myCamModal').modal('hide');
+  pcm.callbackTakePhoto();
+  var video = document.querySelector("#videoElement");
+  video.pause();
+  video.src = "";
+  pcm.streamTakePhone.stop();
+}

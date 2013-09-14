@@ -1,6 +1,6 @@
 /**
  * pcm
- * Navigator2.js
+ * client-app/client-app.js
  */
 
 var pcm = {};
@@ -24,8 +24,8 @@ function loadStore() {
   var storeLoadCallback = function (success) {
     clearInterval(storeWatchdog);
     if (success) {
-//      switchToPanel("logInPanel", false);
-      switchToPanel("newMemberPanel", false);
+      switchToPanel("logInPanel", false);
+//      switchToPanel("newMemberPanel", false);
     } else {
       switchToPanel("loadErrorPanel", false);
     }
@@ -56,6 +56,9 @@ function loadStore() {
 // -------------------------------------------------------------------------------------------------------------------
 function login() {
 
+  // Rest any form data
+  clearNewMemberForm();
+
   // Get from html input controls
   var loginText = document.getElementById("txtLogin").value;
   var passwordText = document.getElementById("txtPassword").value;
@@ -81,12 +84,12 @@ function login() {
 
   // Search store for user
   var loginList = new List(new Login());
-  pcm.hostStore.getList(loginList, {name:loginText, password:passwordText}, function (list, error) {
+  pcm.hostStore.getList(loginList, {name: loginText, password: passwordText}, function (list, error) {
     if (typeof error != 'undefined') {
       alertDanger('Error: ' + error);
       return;
     }
-    if (list.length() <1) {
+    if (list.length() < 1) {
       alertDanger('login failed');
       return;
     }

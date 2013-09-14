@@ -4,28 +4,29 @@
  */
 
 // https://github.com/prusnak/papercoin/blob/master/papercoin.js#L1-L15
-var print_qr = function(doc, x, y, size, text) {
+var print_qr = function (doc, x, y, size, text) {
   var typesize = 4;
   if (text[0] == '5') typesize = 6;
-  var qr = new qrcode(typesize, 'H'); qr.addData(text); qr.make();
+  var qr = new qrcode(typesize, 'H');
+  qr.addData(text);
+  qr.make();
   var m = qr.getModuleCount();
   var s = size / m;
   doc.setFillColor(0);
   for (var r = 0; r < m; r++) {
     for (var c = 0; c < m; c++) {
       if (qr.isDark(r, c)) {
-        doc.rect(x + c*s, y + r*s, s, s, 'F');
+        doc.rect(x + c * s, y + r * s, s, s, 'F');
       }
     }
   }
 };
 
-function makeid()
-{
+function makeid() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  for( var i=0; i < 20; i++ )
+  for (var i = 0; i < 20; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return text;
@@ -45,6 +46,12 @@ function demoTwoPageDocument() {
 
 function makeCards(saveToFile) {
 
+  var pages = parseInt(document.getElementById('makeCardPages').value);
+  if (!pages || pages <1) {
+    alertDanger('Must enter # of pages');
+    return
+  }
+
   var pageOrientation = 'portrait';
   var pageUunits = 'in'; // inches
   var pageFormat = 'a4'; // paper size
@@ -63,7 +70,7 @@ function makeCards(saveToFile) {
 //  pdf.line(leftMargin, topMargin, leftMargin, pageHeight - bottomMargin);
 //  pdf.line(leftMargin, pageHeight - bottomMargin, pageWidth - rightMargin, pageHeight - bottomMargin);
 //  pdf.line(pageWidth - rightMargin, topMargin, pageWidth - rightMargin, pageHeight - bottomMargin);
-  
+
 //  // Font crap
 //  var fontX = 0.5;
 //  var fontY = 0.5;
@@ -111,7 +118,7 @@ function makeCards(saveToFile) {
   var VerticalGap = 0.1;
 
   // Now print each card
-  for (var page = 0; page < 100; page++) {
+  for (var page = 0; page < pages; page++) {
     if (page)
       pdf.addPage();
     for (var top = 0; top < cardsDown; top++) {
@@ -138,8 +145,8 @@ function makeCards(saveToFile) {
         pdf.setFontSize(10);
         pdf.setFont("times");
         pdf.setFontType("italic");
-        for (var i=0; i<8; i++)
-          pdf.text(cardLeft + 1.55, cardTop + 0.6 + (i *0.15), 'You can put rules here if wanted.');
+        for (var i = 0; i < 8; i++)
+          pdf.text(cardLeft + 1.55, cardTop + 0.6 + (i * 0.15), 'You can put rules here if wanted.');
 
         // QR
         var theCode = makeid();
@@ -149,8 +156,6 @@ function makeCards(saveToFile) {
       }
     }
   }
-
-
 
 
   // Draw frame for total page margins

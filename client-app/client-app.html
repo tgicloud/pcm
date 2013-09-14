@@ -14,39 +14,39 @@
 <div style="display: none;" class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" id="navbar">
   <!--<div class="container">-->
 
-    <!-- Large Presentation -->
-    <a class="navbar-brand hidden-sm" href="javascript:command('home')">Private Club</a>
-    <button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm">
-      <span class="glyphicon the-icons glyphicon-plus"></span></button>
-    <button type="button" onclick="command('checkIn')" class="btn-primary btn-cell visible-sm"><span
-            class="glyphicon the-icons glyphicon-ok"></span></button>
-    <button type="button" onclick="command('matchPlay')" class="btn-primary btn-cell visible-sm"><span
-            class="glyphicon the-icons glyphicon-resize-small"></span></button>
-    <button type="button" onclick="command('viewMember')" class="btn-primary btn-cell visible-sm"><span
-            class="glyphicon the-icons glyphicon-user"></span></button>
-    <button type="button" onclick="command('optionsMenu')" class="btn-primary btn-cell visible-sm"><span
-            class="glyphicon the-icons glyphicon-cog"></span></button>
 
-    <!-- Small Presentation -->
-    <div id="navCollapse" class="nav-collapse collapse navbar-responsive-collapse">
-      <ul class="nav navbar-nav">
-        <li id="newMemberNavBtn">
-          <a href="javascript:command('newMember')"><span class="glyphicon glyphicon-plus"></span> New Member</a></li>
-        <li id="checkInNavBtn">
-          <a href="javascript:command('checkIn')"><span class="glyphicon glyphicon-ok"> Check In</span></a></li>
-        <li id="matchPlayNavBtn"><a href="javascript:command('matchPlay')"><span
-                class="glyphicon glyphicon-resize-small"> Match Play</span></a></li>
-        <li id="viewMemberNavBtn"><a href="javascript:command('viewMember')"><span
-                class="glyphicon glyphicon-user"> View Member</span></a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"> Options</span><span
-                  class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="javascript:command('makeCards')">Print Member Cards</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+  <a class="navbar-brand hidden-sm" href="javascript:command('home')">Private Club</a>
+  <button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm">
+    <span class="glyphicon the-icons glyphicon-plus"></span></button>
+  <button type="button" onclick="command('checkIn')" class="btn-primary btn-cell visible-sm"><span
+          class="glyphicon the-icons glyphicon-ok"></span></button>
+  <button type="button" onclick="command('matchPlay')" class="btn-primary btn-cell visible-sm"><span
+          class="glyphicon the-icons glyphicon-resize-small"></span></button>
+  <button type="button" onclick="command('viewMember')" class="btn-primary btn-cell visible-sm"><span
+          class="glyphicon the-icons glyphicon-user"></span></button>
+  <button type="button" onclick="command('optionsMenu')" class="btn-primary btn-cell visible-sm"><span
+          class="glyphicon the-icons glyphicon-cog"></span></button>
+
+
+  <div id="navCollapse" class="nav-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav">
+      <li id="newMemberNavBtn">
+        <a href="javascript:command('newMember')"><span class="glyphicon glyphicon-plus"></span> New Member</a></li>
+      <li id="checkInNavBtn">
+        <a href="javascript:command('checkIn')"><span class="glyphicon glyphicon-ok"> Check In</span></a></li>
+      <li id="matchPlayNavBtn"><a href="javascript:command('matchPlay')"><span
+              class="glyphicon glyphicon-resize-small"> Match Play</span></a></li>
+      <li id="viewMemberNavBtn"><a href="javascript:command('viewMember')"><span
+              class="glyphicon glyphicon-user"> View Member</span></a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"> Options</span><span
+                class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:command('makeCards')">Print Member Cards</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 
   <!--</div>-->
 </div>
@@ -115,26 +115,53 @@
 
 <!-- optionsMenuPanel: Add New Member -->
 <div style="display: none;" class="panel " id="newMemberPanel">
+  <!--<div style="max-width:512px" class="panel-heading">New Member</div>-->
   <div class="panel-heading">New Member</div>
   <form id="submitMember" class="form-horizontal">
 
+    <div id="txtPhotoGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
+      <label for="newMemberPhoto" class="col-lg-3 control-label">Photo</label>
+
+      <div class="col-lg-5">
+        <div class="well well-sm">
+          <canvas id="newMemberPhoto" class="img-responsive" width="320" height="240" style="padding:10px; border:1px solid #000000; background:#FFFFFF"></canvas>
+          <button id="newMemberPhotoBtn" type="button" onclick="TakePhoto_Submit();" class="btn btn-block btn-success">Take Photo</button>
+          <span id="txtPhotoGroupHelp" style="display: none;" class="help-block">Photo required.</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="txtCardGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
+      <label for="newMemberCardBtn" class="col-lg-3 control-label">Member Card</label>
+
+      <div class="col-lg-5">
+        <div class="well well-sm">
+          <button id="newMemberCardBtn" type="button" onclick="TakePhoto_Submit();" class="btn btn-block btn-warning">Scan New Card</button>
+          <span id="txtCardHelp" style="display: none;" class="help-block">Card required.</span>
+        </div>
+      </div>
+    </div>
+
     <div id="txtNameGroup" class="form-group">
       <label for="txtName" class="col-lg-3 control-label">Name</label>
+
       <div class="col-lg-7">
-        <input id="txtName" type="text" class="form-control" placeholder="Name" required>
+        <input id="txtName" type="text" class="form-control" placeholder="First & Last Name" required>
         <span id="txtNameHelp" style="display: none;" class="help-block">Name is required.</span>
       </div>
     </div>
 
     <div class="form-group">
       <label for="txtAddress" class="col-lg-3 control-label">Address</label>
+
       <div class="col-lg-7">
-        <input type="text" class="form-control" id="txtAddress" placeholder="Address">
+        <input type="text" class="form-control" id="txtAddress" placeholder="Street Address">
       </div>
     </div>
 
     <div class="form-group">
       <label for="txtCity" class="col-lg-3 control-label">City State Zip</label>
+
       <div class="col-lg-3">
         <input type="text" class="form-control" id="txtCity" placeholder="City">
       </div>
@@ -142,40 +169,41 @@
         <input type="text" class="form-control" id="txtState" placeholder="XX">
       </div>
       <div class="col-lg-3">
-        <input type="text" class="form-control" id="txtZip" placeholder="XXXXX-XXXX">
+        <input type="text" class="form-control" id="txtZip" placeholder="#####-####">
       </div>
     </div>
 
-
     <div class="form-group">
       <label for="txtPhone" class="col-lg-3 control-label">Phone</label>
-      <div class="col-lg-2">
-        <input type="tel" class="form-control" id="txtPhone" placeholder="XXX-XXX-XXXX">
+
+      <div class="col-lg-3">
+        <input type="tel" class="form-control" id="txtPhone" placeholder="(XXX) XXX-XXXX">
       </div>
-      <label for="txtDOB" class="col-lg-3 control-label">Date of Birth</label>
+      <label for="txtDOB" class="col-lg-2 control-label">Date of Birth</label>
+
       <div class="col-lg-2">
         <input type="datetime" class="form-control" id="txtDOB" placeholder="MM/DD/YYYYY">
       </div>
     </div>
 
     <div class="form-group">
-
       <label for="txtEmail" class="col-lg-3 control-label">Email</label>
+
       <div class="col-lg-4">
         <input type="email" class="form-control" id="txtEmail" placeholder="name@site.com">
       </div>
       <label for="txtMaxMatch" class="col-lg-1 control-label">Match</label>
+
       <div class="col-lg-2">
         <input type="number" min="5" max="100" step="5" class="form-control" id="txtMaxMatch" placeholder="maximum">
       </div>
-
     </div>
 
 
     <div class="form-group">
-      <div class="col-lg-offset-3 col-lg-4">
-        <button type="button" onclick="memberSubmit();" class="btn btn-primary">SAVE</button>
-        <button type="button" onclick="alertDanger('CANCEL THIS MOTHER FUCKER!!!');" class="btn ">CANCEL</button>
+      <div class="col-lg-offset-3 col-lg-6">
+        <button type="button" onclick="memberSubmit();" class="btn btn-primary">Save Member</button>
+        <button type="button" onclick="memberCancel();" class="btn ">Cancel</button>
         <!--<button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm">NEW</button>-->
       </div>
     </div>
@@ -221,6 +249,14 @@
 <!-- matchPlayPanel: Match Play -->
 <div style="display: none;" class="panel" id="matchPlayPanel">
   <div class="panel-heading">Match Play</div>
+  <form>
+
+    <legend>Personalia:</legend>
+    Name: <input class="form-control" type="text"><br>
+    Email: <input class="form-control" type="text"><br>
+    Date of birth: <input class="form-control" type="text">
+
+  </form>
 </div>
 
 <!-- viewMemberPanel: View Member -->
@@ -256,12 +292,11 @@
         <input type="text" class="form-control" id="makeCardPages" placeholder="(number of pages to make)">
       </div>
     </div>
-
     <div class="form-group">
       <div class="col-lg-offset-2 col-lg-10">
         <button type="button" onclick="makeCards(true)" class="btn btn-primary">Download PDF</button>
-        <button type="button" onclick="makeCards(false)" class="btn btn-primary">Open PDF</button>
-        <button type="button" onclick="" class="btn btn-primary">Save Settings</button>
+        <!--<button type="button" onclick="makeCards(false)" class="btn btn-primary">Open PDF</button>-->
+        <!--<button type="button" onclick="" class="btn btn-primary">Save Settings</button>-->
       </div>
     </div>
   </form>
@@ -275,36 +310,90 @@
   </button>
 </div>
 
+<!-- Button trigger modal -->
+<!--<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Launch demo modal</a>-->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Please Confirm</h4>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" onclick="OKCancel_OK();" class="btn btn-primary">OK</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Button trigger modal -->
+<!--<a data-toggle="modal" href="#myCamModal" class="btn btn-primary btn-lg">Launch demo modal</a>-->
+<!-- Modal for cam pictures-->
+<div class="modal fade" id="myCamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Taking Picture</h4>
+      </div>
+      <div id="modalCamBody" class="modal-body">
+        <div class="video-div">
+          <video width="320" height="240" id="videoElement" style="background:#898989" autoplay>Your browser does not support the video tag.</video>
+        </div>
+      </div>
+
+      <div id="picError" style="margin-top: 0px;margin-right: 25px;margin-left: 25px;margin-bottom: 0px;" class="alert alert-danger">
+        Error taking photo, make sure permission allowed in browser.
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" onclick="TakePhoto_Snap();" class="btn btn-success">Snap Photo</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
 </div>
 
 <div> <!--Just so I can collapse scripts-->
-<!-- Load scripts now-->
-<script src="vendor/jquery-1.10.2.min.js"></script>
-<!--<script src="vendor/jquery-ui.min.js"></script>-->
-<script src="vendor/bootstrap.min.js"></script>
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-<script src="vendor/qrcode.js"></script>
-<script src="vendor/uuid.js"></script>
+      <!-- Load scripts now-->
+  <script src="vendor/jquery-1.10.2.min.js"></script>
+      <!--<script src="vendor/jquery-ui.min.js"></script>-->
+  <script src="vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script src="vendor/qrcode.js"></script>
+  <script src="vendor/uuid.js"></script>
 
-<!--All this is for jspdf-->
-<script type="text/javascript" src="vendor/jspdf/jspdf.js"></script>
-<script type="text/javascript" src="vendor/jspdf/libs/Deflate/adler32cs.js"></script>
-<script type="text/javascript" src="vendor/jspdf/libs/FileSaver.js/FileSaver.js"></script>
-<script type="text/javascript" src="vendor/jspdf/libs/Blob.js/BlobBuilder.js"></script>
-<script type="text/javascript" src="vendor/jspdf/jspdf.plugin.addimage.js"></script>
-<script type="text/javascript" src="vendor/jspdf/jspdf.plugin.standard_fonts_metrics.js"></script>
-<script type="text/javascript" src="vendor/jspdf/jspdf.plugin.split_text_to_size.js"></script>
-<script type="text/javascript" src="vendor/jspdf/jspdf.plugin.from_html.js"></script>
+      <!--All this is for jspdf-->
+  <script type="text/javascript" src="vendor/jspdf/jspdf.js"></script>
+  <script type="text/javascript" src="vendor/jspdf/libs/Deflate/adler32cs.js"></script>
+  <script type="text/javascript" src="vendor/jspdf/libs/FileSaver.js/FileSaver.js"></script>
+  <script type="text/javascript" src="vendor/jspdf/libs/Blob.js/BlobBuilder.js"></script>
+  <script type="text/javascript" src="vendor/jspdf/jspdf.plugin.addimage.js"></script>
+  <script type="text/javascript" src="vendor/jspdf/jspdf.plugin.standard_fonts_metrics.js"></script>
+  <script type="text/javascript" src="vendor/jspdf/jspdf.plugin.split_text_to_size.js"></script>
+  <script type="text/javascript" src="vendor/jspdf/jspdf.plugin.from_html.js"></script>
 
-<!--World famous JS lib-->
-<script src="vendor/tequila.js"></script>
+      <!--World famous JS lib-->
+  <script src="vendor/tequila.js"></script>
 
-<!--The app stuff-->
-<script src="models.js"></script>
-<script src="makeCards.js"></script>
-<script src="client-app.js"></script>
-<script src="gui-functions.js"></script>
-<script src="member-form.js"></script>
+      <!--The app stuff-->
+  <script src="models.js"></script>
+  <script src="makeCards.js"></script>
+  <script src="client-app.js"></script>
+  <script src="gui-functions.js"></script>
+  <script src="member-form.js"></script>
 </div>
 </body>
 </html>

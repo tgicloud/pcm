@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Webcam Tests</title>
+  <title>Webcam Tests</title>
 
-    <script type="text/javascript" src="crap/grid.js"></script>
-    <script type="text/javascript" src="crap/version.js"></script>
-    <script type="text/javascript" src="crap/detector.js"></script>
-    <script type="text/javascript" src="crap/formatinf.js"></script>
-    <script type="text/javascript" src="crap/errorlevel.js"></script>
-    <script type="text/javascript" src="crap/bitmat.js"></script>
-    <script type="text/javascript" src="crap/datablock.js"></script>
-    <script type="text/javascript" src="crap/bmparser.js"></script>
-    <script type="text/javascript" src="crap/datamask.js"></script>
-    <script type="text/javascript" src="crap/rsdecoder.js"></script>
-    <script type="text/javascript" src="crap/gf256poly.js"></script>
-    <script type="text/javascript" src="crap/gf256.js"></script>
-    <script type="text/javascript" src="crap/decoder.js"></script>
-    <script type="text/javascript" src="crap/qrcode.js"></script>
-    <script type="text/javascript" src="crap/findpat.js"></script>
-    <script type="text/javascript" src="crap/alignpat.js"></script>
-    <script type="text/javascript" src="crap/databr.js"></script>
+  <script type="text/javascript" src="crap/grid.js"></script>
+  <script type="text/javascript" src="crap/version.js"></script>
+  <script type="text/javascript" src="crap/detector.js"></script>
+  <script type="text/javascript" src="crap/formatinf.js"></script>
+  <script type="text/javascript" src="crap/errorlevel.js"></script>
+  <script type="text/javascript" src="crap/bitmat.js"></script>
+  <script type="text/javascript" src="crap/datablock.js"></script>
+  <script type="text/javascript" src="crap/bmparser.js"></script>
+  <script type="text/javascript" src="crap/datamask.js"></script>
+  <script type="text/javascript" src="crap/rsdecoder.js"></script>
+  <script type="text/javascript" src="crap/gf256poly.js"></script>
+  <script type="text/javascript" src="crap/gf256.js"></script>
+  <script type="text/javascript" src="crap/decoder.js"></script>
+  <script type="text/javascript" src="crap/qrcode.js"></script>
+  <script type="text/javascript" src="crap/findpat.js"></script>
+  <script type="text/javascript" src="crap/alignpat.js"></script>
+  <script type="text/javascript" src="crap/databr.js"></script>
 </head>
 
 <body>
-    <video width="500" height="375" id="videoElement" style="background:#898989" autoplay>Bloop</video>
-    <canvas width="500" height="375" id="qr-canvas" style="background:#121212"></canvas>
-    <script>
-        var video = document.querySelector("#videoElement");
-        var canvas = document.querySelector("#qr-canvas");
-        var context = canvas.getContext('2d');
+<video width="500" height="375" id="videoElement" style="background:#898989" autoplay>Bloop</video>
+<canvas width="500" height="375" id="qr-canvas" style="background:#121212"></canvas>
+<script>
+  var video = document.querySelector("#videoElement");
+  var canvas = document.querySelector("#qr-canvas");
+  var context = canvas.getContext('2d');
 
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
-        //if (navigator.getUserMedia) {
-        //    navigator.getUserMedia({video: true}, handleVideo, videoError);
-        //}
+  //if (navigator.getUserMedia) {
+  //    navigator.getUserMedia({video: true}, handleVideo, videoError);
+  //}
 
-        navigator.getUserMedia({video:true}, function(stream) {
-            video.src = window.URL.createObjectURL(stream);
-        }, function(err) {
-            console.error(err)
-        });
+  navigator.getUserMedia({video: true}, function (stream) {
+    video.src = window.URL.createObjectURL(stream);
+  }, function (err) {
+    console.error(err)
+  });
 
-        // Scan
-        window.setInterval( function() {
-            context.fillRect(0,0,500,375);
-            context.drawImage(video, 0,0,500,375);
-            imageData = context.getImageData( 0,0,500,375);
-            qrcode.callback = function(data) { console.log(data) };
-            qrcode.decode()
-        }, 1000)
-    </script>
+  // Scan
+  window.setInterval(function () {
+    context.fillRect(0, 0, 500, 375);
+    context.drawImage(video, 0, 0, 500, 375);
+    imageData = context.getImageData(0, 0, 500, 375);
+    var decodeString;
+    try {
+      decodeString = qrcode.decode();
+    } catch (e) {
+    }
+    if (decodeString) {
+      console.log(decodeString);
+    } else {
+      console.log('nope!');
+    }
+  }, 250)
+</script>
 
 </body>
 </html>
