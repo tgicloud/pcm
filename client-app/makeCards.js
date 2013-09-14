@@ -7,7 +7,7 @@
 var print_qr = function (doc, x, y, size, text) {
   var typesize = 4;
   if (text[0] == '5') typesize = 6;
-  var qr = new qrcode(typesize, 'H');
+  var qr = new qrcodeGen(typesize, 'H');
   qr.addData(text);
   qr.make();
   var m = qr.getModuleCount();

@@ -30,8 +30,10 @@ var Tequila = (function () {
       getUnusedProperties: function (properties, allowedProperties) {
         var props = [];
         for (var property in properties) {
-          if (!this.contains(allowedProperties, property)) {
-            props.push(property);
+          if (properties.hasOwnProperty(property)) {
+            if (!this.contains(allowedProperties, property)) {
+              props.push(property);
+            }
           }
         }
         return props;
@@ -89,21 +91,21 @@ function Transport(location, callBack) {
   self.connected = false;
   self.initialConnect = true;
   self.location = location;
-  if (self.location=='') self.location='http host';
+  if (self.location == '') self.location = 'http host';
   self.socket = io.connect(location);
   self.socket.on('connect', function () {
     self.connected = true;
     self.initialConnect = false;
-    console.log('socket.io ('+self.location+') connected');
+    console.log('socket.io (' + self.location + ') connected');
     callBack.call(self, new Message('Connected', ''));
   });
   self.socket.on('connecting', function () {
-    console.log('socket.io ('+self.location+') connecting');
+    console.log('socket.io (' + self.location + ') connecting');
   });
   self.socket.on('error', function (reason) {
     var theReason = reason;
     if (theReason.length < 1) theReason = "(unknown)";
-    console.error('socket.io ('+self.location+') error: ' + theReason + '.');
+    console.error('socket.io (' + self.location + ') error: ' + theReason + '.');
     // If have not ever connected then signal error
     if (self.initialConnect) {
       callBack.call(self, new Message('Error', 'cannot connect'));
@@ -112,18 +114,18 @@ function Transport(location, callBack) {
   self.socket.on('connect_failed', function (reason) {
     var theReason = reason;
     if (theReason.length < 1) theReason = "(unknown)";
-    console.error('socket.io ('+self.location+') connect_failed: ' + theReason + '.');
+    console.error('socket.io (' + self.location + ') connect_failed: ' + theReason + '.');
     // If have not ever connected then signal error
     if (self.initialConnect) {
       callBack.call(self, new Message('Error', 'cannot connect'));
     }
   });
   self.socket.on('message', function (obj) {
-    console.log('socket.io ('+self.location+') message: ' + obj);
+    console.log('socket.io (' + self.location + ') message: ' + obj);
   });
   self.socket.on('disconnect', function (reason) {
     self.connected = false;
-    console.log('socket.io ('+self.location+') disconnect: ' + reason);
+    console.log('socket.io (' + self.location + ') disconnect: ' + reason);
   });
 }
 /*
@@ -156,7 +158,7 @@ Transport.prototype.close = function () {
  * message-class
  */
 // Message Constructor
-function Message(type,contents) {
+function Message(type, contents) {
   if (false === (this instanceof Message)) throw new Error('new operator required');
   if ('undefined' == typeof type) throw new Error('message type required');
   if (!T.contains(T.getMessageTypes(), type)) throw new Error('Invalid message type: ' + type);
@@ -169,10 +171,10 @@ function Message(type,contents) {
 Message.prototype.toString = function () {
   switch (this.type) {
     case 'Null':
-      return this.type+ ' Message';
+      return this.type + ' Message';
       break;
     default:
-      return this.type+ ' Message: ' + this.contents;
+      return this.type + ' Message: ' + this.contents;
       break;
   }
 };
@@ -242,7 +244,8 @@ function Attribute(args, arg2) {
   var badJooJoo = this.getValidationErrors(); // before leaving make sure valid Attribute
   for (var i = 0; i < unusedProperties.length; i++) badJooJoo.push('invalid property: ' + unusedProperties[i]);
   if (badJooJoo.length > 1) throw new Error('error creating Attribute: multiple errors');
-  if (badJooJoo.length) throw new Error('error creating Attribute: ' + badJooJoo[0]);
+  if (badJooJoo.length)
+    throw new Error('error creating Attribute: ' + badJooJoo[0]);
 }
 /*
  * Methods
@@ -279,7 +282,7 @@ Attribute.prototype.coerce = function (value) {
     case 'Boolean':
       if (typeof newValue == 'undefined') return false;
       if (typeof newValue == 'string') {
-        newValue =newValue.toUpperCase();
+        newValue = newValue.toUpperCase();
         if (newValue === 'Y' || newValue === 'YES' || newValue === 'T' || newValue === 'TRUE' || newValue === '1')
           return true;
         return false;
@@ -365,7 +368,7 @@ function splitParens(str, outside, inside) {
 var Model = function (args) {
   if (false === (this instanceof Model)) throw new Error('new operator required');
   this.modelType = "Model";
-  this.attributes = [new Attribute('id','ID')];
+  this.attributes = [new Attribute('id', 'ID')];
   args = args || [];
   if (args.attributes) {
     for (var i in args.attributes) {
@@ -393,7 +396,7 @@ Model.prototype.getValidationErrors = function () {
   if (!(this.attributes instanceof Array)) {
     errors.push('attributes must be Array');
   } else {
-    if (this.attributes.length<1) {
+    if (this.attributes.length < 1) {
       errors.push('attributes must not be empty');
     } else {
       for (var i = 0; i < this.attributes.length; i++) {
@@ -408,13 +411,13 @@ Model.prototype.getValidationErrors = function () {
   }
   return errors;
 };
-Model.prototype.get = function(attribute) {
+Model.prototype.get = function (attribute) {
   for (var i = 0; i < this.attributes.length; i++) {
     if (this.attributes[i].name.toUpperCase() == attribute.toUpperCase())
       return this.attributes[i].value;
   }
 };
-Model.prototype.set = function(attribute,value) {
+Model.prototype.set = function (attribute, value) {
   for (var i = 0; i < this.attributes.length; i++) {
     if (this.attributes[i].name.toUpperCase() == attribute.toUpperCase()) {
       this.attributes[i].value = value;
@@ -422,7 +425,8 @@ Model.prototype.set = function(attribute,value) {
     }
   }
   throw new Error('attribute not valid for model');
-};/**
+};
+/**
  * tequila
  * list-class
  */
@@ -450,7 +454,7 @@ List.prototype.get = function (attribute) {
       return this._items[this._itemIndex][i];
   }
 };
-List.prototype.set = function (attribute,value) {
+List.prototype.set = function (attribute, value) {
   if (this._items.length < 1) throw new Error('list is empty');
   for (var i = 0; i < this.model.attributes.length; i++) {
     if (this.model.attributes[i].name.toUpperCase() == attribute.toUpperCase()) {
@@ -533,10 +537,11 @@ List.prototype.sort = function (key) {
 // Model Constructor
 var User = function (args) {
   if (false === (this instanceof User)) throw new Error('new operator required');
-  Model.call(this,args);
+  Model.call(this, args);
   this.modelType = "User";
 };
-User.prototype = T.inheritPrototype(Model.prototype);/**
+User.prototype = T.inheritPrototype(Model.prototype);
+/**
  * tequila
  * store-core-model
  */
@@ -566,7 +571,7 @@ Store.prototype.toString = function () {
   if (this.name == 'a ' + this.storeType) {
     return this.name;
   } else {
-    return this.storeType + ': ' +this.name;
+    return this.storeType + ': ' + this.name;
   }
 };
 Store.prototype.getStoreInterface = function () {
@@ -834,9 +839,11 @@ RemoteStore.prototype.putModel = function (model, callBack) {
       var c = msg.contents;
       model.attributes = [];
       for (var a in c.attributes) {
-        var attrib = new Attribute(c.attributes[a].name, c.attributes[a].type);
-        attrib.value = c.attributes[a].value;
-        model.attributes.push(attrib);
+        if (c.attributes.hasOwnProperty(a)) {
+          var attrib = new Attribute(c.attributes[a].name, c.attributes[a].type);
+          attrib.value = c.attributes[a].value;
+          model.attributes.push(attrib);
+        }
       }
       if (typeof c == 'string')
         callBack(model, c);
@@ -1011,6 +1018,7 @@ T.setMessageHandler('GetList', function getListMessageHandler(messageContents, f
   proxyList.model.modelType = messageContents.list.model.modelType;
   proxyList.model.attributes = messageContents.list.model.attributes;
   var msg;
+
   function messageCallback(list, error) {
     if (typeof error == 'undefined')
       msg = new Message('GetListAck', list);
@@ -1018,6 +1026,7 @@ T.setMessageHandler('GetList', function getListMessageHandler(messageContents, f
       msg = new Message('GetListAck', error);
     fn(msg);
   }
+
   if (messageContents.order) {
     hostStore.getList(proxyList, messageContents.filter, messageContents.order, messageCallback);
   } else {

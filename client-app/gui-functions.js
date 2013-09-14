@@ -58,11 +58,11 @@ function command(cmd) {
   switchToPanel(cmd + "Panel", true);
 }
 
-
 // -------------------------------------------------------------------------------------------------------------------
 // Take Photo
 // -------------------------------------------------------------------------------------------------------------------
-function TakePhoto(callback) {
+function TakePhoto(args, callback) {
+  args = args || {};
   $("#picError").hide();
   pcm.callbackTakePhoto = callback;
   pcm.streamTakePhone = null;
@@ -71,19 +71,64 @@ function TakePhoto(callback) {
   navigator.getUserMedia({video: true}, function (stream) {
     pcm.streamTakePhone = stream;
     video.src = window.URL.createObjectURL(stream);
+    if (args.isCard) {
+      console.log('args.isCard YES');
+      pcm.qrcodeIntervalHandle = setInterval(scanQRCodes, 333);
+    } else {
+      console.log('args.isCard NOPE');
+    }
   }, function (err) {
     alertDanger('cam error: ' + err.name);
     $('#myCamModal').modal('hide');
   });
   $('#myCamModal').modal('show');
 }
-function TakePhoto_Snap() {
 
+// -------------------------------------------------------------------------------------------------------------------
+// Scan QRCodes
+// -------------------------------------------------------------------------------------------------------------------
+function scanQRCodes() {
+
+  var video = document.querySelector("#videoElement");
+  var canvas = document.querySelector("#qr-canvas");
+  var context = canvas.getContext('2d');
+  context.fillRect(0, 0, 320, 240);
+  context.drawImage(video, 0, 0, 320, 240);
+  var decodeString;
+  try {
+    decodeString = qrcode.decode();
+  } catch (e) {
+  }
+  if (decodeString) {
+
+    pcm.qrCode = decodeString;
+
+    console.log('scanQRCodes("' + decodeString + '")');
+
+    window.clearInterval(pcm.qrcodeIntervalHandle);
+    pcm.qrcodeIntervalHandle = undefined;
+
+    $('#myCamModal').modal('hide');
+    pcm.callbackTakePhoto();
+    var video = document.querySelector("#videoElement");
+    video.pause();
+    video.src = "";
+    pcm.streamTakePhone.stop();
+
+
+  } else {
+    console.log('scanQRCodes()' + new Date());
+  }
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+// Snap Button Pressed
+// -------------------------------------------------------------------------------------------------------------------
+function TakePhoto_Snap() {
   if (!pcm.streamTakePhone) {
     $("#picError").show();
     return;
   }
-
   $('#myCamModal').modal('hide');
   pcm.callbackTakePhoto();
   var video = document.querySelector("#videoElement");

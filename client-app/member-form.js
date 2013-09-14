@@ -61,6 +61,9 @@ function memberSubmit() {
   memberModel.set('email', document.getElementById("txtEmail").value);
   memberModel.set('maxMatch', document.getElementById("txtMaxMatch").value);
   memberModel.set('name', document.getElementById("txtName").value);
+  memberModel.set('qrCode', pcm.qrCode);
+
+  //pcm.qrCode
   pcm.hostStore.putModel(memberModel, function (model, error) {
     if (typeof error != 'undefined') {
       alertDanger('Error: ' + error);
@@ -77,20 +80,50 @@ function memberSubmit() {
 // -------------------------------------------------------------------------------------------------------------------
 // Take Photo Submit
 // -------------------------------------------------------------------------------------------------------------------
-function TakePhoto_Submit() {
-  TakePhoto(function () {
-    pcm.gotPhoto = true;
-    $("#txtPhotoGroup").removeClass("has-error");
-    $("#txtPhotoGroupHelp").hide();
-    document.getElementById("newMemberPhotoBtn").setAttribute("class", "btn btn-block btn-success");
-    document.getElementById("newMemberPhotoBtn").innerHTML="Retake Photo";
-    $("#newMemberPhoto").show();
-    var video = document.querySelector("#videoElement");
-    var canvas = document.querySelector("#newMemberPhoto");
-    var context = canvas.getContext('2d');
-    context.fillRect(0, 0, 320, 240);
-    context.drawImage(video, 0,0,320,240);
-  });
+function TakePhoto_Submit(args) {
+  args = args || {};
+
+  // One time init
+  if (!pcm.photoInit) {
+    pcm.photoInit = true;
+    $('#myCamModal').on('hidden.bs.modal', function () {
+      if (pcm.qrcodeIntervalHandle) {
+        window.clearInterval(pcm.qrcodeIntervalHandle);
+        pcm.qrcodeIntervalHandle = undefined;
+      }
+      console.log('// do something…');
+    });
+  }
+
+  if (args.isCard) {
+    document.getElementById("picTitle").innerHTML = "Scan New Player Card";
+    $("#picSnapBtn").hide();
+    TakePhoto(args, function () {
+      pcm.gotCard = true;
+      $("#txtCardGroup").removeClass("has-error");
+      $("#txtCardHelp").hide();
+      document.getElementById("newMemberCardBtn").setAttribute("class", "btn btn-block btn-success");
+      document.getElementById("newMemberCardBtn").innerHTML =
+        '<span class="glyphicon glyphicon-qrcode"></span> Rescan NEW Card';
+      $("#newMemberPhoto").show();
+    });
+  } else {
+    document.getElementById("picTitle").innerHTML = "Taking Member Photo";
+    $("#picSnapBtn").show();
+    TakePhoto(args, function () {
+      pcm.gotPhoto = true;
+      $("#txtPhotoGroup").removeClass("has-error");
+      $("#txtPhotoGroupHelp").hide();
+      document.getElementById("newMemberPhotoBtn").setAttribute("class", "btn btn-block btn-success");
+      document.getElementById("newMemberPhotoBtn").innerHTML = '<span class="glyphicon glyphicon-picture"></span> Retake Photo';
+      $("#newMemberPhoto").show();
+      var video = document.querySelector("#videoElement");
+      var canvas = document.querySelector("#newMemberPhoto");
+      var context = canvas.getContext('2d');
+      context.fillRect(0, 0, 320, 240);
+      context.drawImage(video, 0, 0, 320, 240);
+    });
+  }
 }
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -110,9 +143,9 @@ function clearNewMemberForm() {
   pcm.gotPhoto = false;
   pcm.gotCard = false;
   document.getElementById("newMemberPhotoBtn").setAttribute("class", "btn btn-block btn-warning");
-  document.getElementById("newMemberPhotoBtn").innerHTML="Take Photo";
+  document.getElementById("newMemberPhotoBtn").innerHTML = "Take Photo";
   document.getElementById("newMemberCardBtn").setAttribute("class", "btn btn-block btn-warning");
-  document.getElementById("newMemberCardBtn").innerHTML="Scan New Card";
+  document.getElementById("newMemberCardBtn").innerHTML = "Scan New Card";
 
   $("#txtPhotoGroup").removeClass("has-error");
   $("#txtPhotoGroupHelp").hide();

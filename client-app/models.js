@@ -25,6 +25,7 @@ var Member = function (args) {
   this.attributes.push(new Attribute('DOB'));
   this.attributes.push(new Attribute('email'));
   this.attributes.push(new Attribute('maxMatch'));
+  this.attributes.push(new Attribute('qrCode'));
 };
 Member.prototype = T.inheritPrototype(Model.prototype);
 

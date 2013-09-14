@@ -136,7 +136,7 @@
 
       <div class="col-lg-5">
         <div class="well well-sm">
-          <button id="newMemberCardBtn" type="button" onclick="TakePhoto_Submit();" class="btn btn-block btn-warning">Scan New Card</button>
+          <button id="newMemberCardBtn" type="button" onclick="TakePhoto_Submit({isCard:true});" class="btn btn-block btn-warning">Scan New Card</button>
           <span id="txtCardHelp" style="display: none;" class="help-block">Card required.</span>
         </div>
       </div>
@@ -340,20 +340,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Taking Picture</h4>
+        <h4 id="picTitle" class="modal-title">Taking Picture</h4>
       </div>
       <div id="modalCamBody" class="modal-body">
         <div class="video-div">
           <video width="320" height="240" id="videoElement" style="background:#898989" autoplay>Your browser does not support the video tag.</video>
+          <canvas id="qr-canvas" class="img-responsive" width="320" height="240" style="display: none; padding:10px; border:1px solid #000000; background:#FFFFFF"></canvas>
         </div>
       </div>
-
       <div id="picError" style="margin-top: 0px;margin-right: 25px;margin-left: 25px;margin-bottom: 0px;" class="alert alert-danger">
         Error taking photo, make sure permission allowed in browser.
       </div>
-
       <div class="modal-footer">
-        <button type="button" onclick="TakePhoto_Snap();" class="btn btn-success">Snap Photo</button>
+        <button id="picSnapBtn" type="button" onclick="TakePhoto_Snap();" class="btn btn-success">Snap Photo</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
@@ -384,6 +383,25 @@
   <script type="text/javascript" src="vendor/jspdf/jspdf.plugin.standard_fonts_metrics.js"></script>
   <script type="text/javascript" src="vendor/jspdf/jspdf.plugin.split_text_to_size.js"></script>
   <script type="text/javascript" src="vendor/jspdf/jspdf.plugin.from_html.js"></script>
+
+      <!--qrcode-->
+  <script type="text/javascript" src="vendor/qrcode-lib/grid.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/version.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/detector.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/formatinf.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/errorlevel.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/bitmat.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/datablock.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/bmparser.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/datamask.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/rsdecoder.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/gf256poly.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/gf256.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/decoder.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/qrcode.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/findpat.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/alignpat.js"></script>
+  <script type="text/javascript" src="vendor/qrcode-lib/databr.js"></script>
 
       <!--World famous JS lib-->
   <script src="vendor/tequila.js"></script>
