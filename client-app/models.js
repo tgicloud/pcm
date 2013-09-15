@@ -22,10 +22,13 @@ var Member = function (args) {
   this.attributes.push(new Attribute('state'));
   this.attributes.push(new Attribute('zip'));
   this.attributes.push(new Attribute('phone'));
-  this.attributes.push(new Attribute('DOB'));
+  this.attributes.push(new Attribute('DOB','Date'));
   this.attributes.push(new Attribute('email'));
-  this.attributes.push(new Attribute('maxMatch'));
+  this.attributes.push(new Attribute('maxMatch','Number'));
   this.attributes.push(new Attribute('qrCode'));
+  this.attributes.push(new Attribute('photo'));
 };
 Member.prototype = T.inheritPrototype(Model.prototype);
+
+// CheckIns
 

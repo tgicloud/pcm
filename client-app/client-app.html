@@ -213,6 +213,61 @@
 <!-- checkInPanel: Member Check In -->
 <div style="display: none;" class="panel" id="checkInPanel">
   <div class="panel-heading">Check In</div>
+  <form id="submitCheckIn" class="form-horizontal">
+
+    <div id="txtMatchPlayGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
+      <label for="matchPlayPicture" class="col-lg-3 control-label">Member Photo</label>
+      <div class="col-lg-5">
+        <div class="well well-sm">
+          <canvas id="matchPlayPicture" class="img-responsive" width="320" height="240" style="padding:10px; border:1px solid #000000; background:#FFFFFF"></canvas>
+          <!--<button id="matchPlayBtn" type="button" onclick="TakeMatchPlay_Submit();" class="btn btn-block btn-success">Take MatchPlay</button>-->
+          <!--<span id="txtMatchPlayGroupHelp" style="display: none;" class="help-block">MatchPlay required.</span>-->
+        </div>
+      </div>
+    </div>
+
+    <!--<img src="img/BlankPicture.png" class="img-responsive" alt="Responsive image">-->
+    <div id="txtCheckInNameGroup" class="form-group">
+      <label for="txtCheckInName" class="col-lg-3 control-label">Name & Address</label>
+      <div class="col-lg-7">
+        <div class="well well-sm">
+        <address id="txtCheckInName" >
+          <strong>John Doe</strong><br>
+          795 Folsom Ave, Suite 600<br>
+          San Francisco, CA 94107<br>
+          Phone: (123) 456-7890<br>
+          Email: wtf@lol.com
+        </address>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-6">
+        <button type="button" onclick="memberSubmit();" class="btn btn-primary">Check In</button>
+        <button type="button" onclick="memberCancel();" class="btn ">Cancel</button>
+        <!--<button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm">NEW</button>-->
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- matchPlayPanel: Match Play -->
+<div style="display: none;" class="panel" id="matchPlayPanel">
+  <div class="panel-heading">Match Play</div>
+  <form>
+
+    <legend>Personalia:</legend>
+    Name: <input class="form-control" type="text"><br>
+    Email: <input class="form-control" type="text"><br>
+    Date of birth: <input class="form-control" type="text">
+
+  </form>
+</div>
+
+<!-- viewMemberPanel: View Member -->
+<div style="display: none;" class="panel" id="viewMemberPanel">
+  <div class="panel-heading">View Member</div>
   <div class="form-horizontal">
 
     <table class="table table-hover table-bordered">
@@ -242,33 +297,6 @@
 
   </div>
   <!-- /example -->
-
-
-</div>
-
-<!-- matchPlayPanel: Match Play -->
-<div style="display: none;" class="panel" id="matchPlayPanel">
-  <div class="panel-heading">Match Play</div>
-  <form>
-
-    <legend>Personalia:</legend>
-    Name: <input class="form-control" type="text"><br>
-    Email: <input class="form-control" type="text"><br>
-    Date of birth: <input class="form-control" type="text">
-
-  </form>
-</div>
-
-<!-- viewMemberPanel: View Member -->
-<div style="display: none;" class="panel" id="viewMemberPanel">
-  <div class="panel-heading">View Member</div>
-  <img src="img/Alfred_e_newman.jpg" class="img-responsive" alt="Responsive image">
-  <address>
-    <strong>Twitter, Inc.</strong><br>
-    795 Folsom Ave, Suite 600<br>
-    San Francisco, CA 94107<br>
-    <abbr title="Phone">P:</abbr> (123) 456-7890
-  </address>
 </div>
 
 <!-- makeCardsPanel: Make Player Cards -->

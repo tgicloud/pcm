@@ -112,11 +112,8 @@ function scanQRCodes() {
   } catch (e) {
   }
   if (decodeString) {
-
     pcm.qrCode = decodeString;
-
     console.log('scanQRCodes("' + decodeString + '")');
-
     window.clearInterval(pcm.qrcodeIntervalHandle);
     pcm.qrcodeIntervalHandle = undefined;
 
@@ -126,8 +123,6 @@ function scanQRCodes() {
     video.pause();
     video.src = "";
     pcm.streamTakePhone.stop();
-
-
   } else {
     console.log('scanQRCodes()' + new Date());
   }

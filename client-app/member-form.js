@@ -62,6 +62,7 @@ function memberSubmit() {
   memberModel.set('maxMatch', document.getElementById("txtMaxMatch").value);
   memberModel.set('name', document.getElementById("txtName").value);
   memberModel.set('qrCode', pcm.qrCode);
+  memberModel.set('photo', pcm.dataURL);
 
   //pcm.qrCode
   pcm.hostStore.putModel(memberModel, function (model, error) {
@@ -126,6 +127,7 @@ function TakePhoto_Submit(args) {
       var context = canvas.getContext('2d');
       context.fillRect(0, 0, 320, 240);
       context.drawImage(video, 0, 0, 320, 240);
+      pcm.dataURL = canvas.toDataURL();
     });
   }
 }
