@@ -6,6 +6,7 @@
 var pcm = {};
 pcm.lastPanelShown = "loadingPanel";
 pcm.userID = null;
+pcm.panelLoaders = {};
 
 // -------------------------------------------------------------------------------------------------------------------
 // Entry point when document ready

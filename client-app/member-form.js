@@ -83,29 +83,33 @@ function memberSubmit() {
 function TakePhoto_Submit(args) {
   args = args || {};
 
-  // One time init
-  if (!pcm.photoInit) {
-    pcm.photoInit = true;
-    $('#myCamModal').on('hidden.bs.modal', function () {
-      if (pcm.qrcodeIntervalHandle) {
-        window.clearInterval(pcm.qrcodeIntervalHandle);
-        pcm.qrcodeIntervalHandle = undefined;
-      }
-      console.log('// do something…');
-    });
-  }
-
   if (args.isCard) {
     document.getElementById("picTitle").innerHTML = "Scan New Player Card";
     $("#picSnapBtn").hide();
     TakePhoto(args, function () {
-      pcm.gotCard = true;
-      $("#txtCardGroup").removeClass("has-error");
-      $("#txtCardHelp").hide();
-      document.getElementById("newMemberCardBtn").setAttribute("class", "btn btn-block btn-success");
-      document.getElementById("newMemberCardBtn").innerHTML =
-        '<span class="glyphicon glyphicon-qrcode"></span> Rescan NEW Card';
-      $("#newMemberPhoto").show();
+      // find the member
+      var searchMember = new Member();
+      var searchList = new List(searchMember);
+      pcm.hostStore.getList(searchList, {qrCode: pcm.qrCode}, function (list, error) {
+        if (error) {
+          command('home');
+          alertDanger('Error in getList: ' + error);
+        } else {
+          if (list.length() > 0) {
+            console.log('wt');
+            alertDanger('shitz used dude');
+          } else {
+            console.log('fuck');
+            pcm.gotCard = true;
+            $("#txtCardGroup").removeClass("has-error");
+            $("#txtCardHelp").hide();
+            document.getElementById("newMemberCardBtn").setAttribute("class", "btn btn-block btn-success");
+            document.getElementById("newMemberCardBtn").innerHTML =
+              '<span class="glyphicon glyphicon-qrcode"></span> Rescan NEW Card';
+            $("#newMemberPhoto").show();
+          }
+        }
+      });
     });
   } else {
     document.getElementById("picTitle").innerHTML = "Taking Member Photo";

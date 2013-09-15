@@ -17,12 +17,17 @@ function switchToPanel(panel, showHideNav) {
   }
 
   var newPanel = $('#' + panel);
+
   if (newPanel.length) {
     $('#alertDangerDiv').hide();
     $('#' + pcm.lastPanelShown).hide();
     pcm.lastPanelShown = panel;
     $(newPanel).show();
     $('html,body').scrollTop(0);
+    // if page loader defined
+    if (pcm.panelLoaders[panel]) {
+      pcm.panelLoaders[panel]();
+    }
   } else {
     alertDanger('Cannot find ' + panel + '.')
   }
@@ -63,6 +68,18 @@ function command(cmd) {
 // -------------------------------------------------------------------------------------------------------------------
 function TakePhoto(args, callback) {
   args = args || {};
+
+  // One time init
+  if (!pcm.photoInit) {
+    pcm.photoInit = true;
+    $('#myCamModal').on('hidden.bs.modal', function () {
+      if (pcm.qrcodeIntervalHandle) {
+        window.clearInterval(pcm.qrcodeIntervalHandle);
+        pcm.qrcodeIntervalHandle = undefined;
+      }
+    });
+  }
+
   $("#picError").hide();
   pcm.callbackTakePhoto = callback;
   pcm.streamTakePhone = null;
@@ -71,12 +88,7 @@ function TakePhoto(args, callback) {
   navigator.getUserMedia({video: true}, function (stream) {
     pcm.streamTakePhone = stream;
     video.src = window.URL.createObjectURL(stream);
-    if (args.isCard) {
-      console.log('args.isCard YES');
-      pcm.qrcodeIntervalHandle = setInterval(scanQRCodes, 333);
-    } else {
-      console.log('args.isCard NOPE');
-    }
+    if (args.isCard) pcm.qrcodeIntervalHandle = setInterval(scanQRCodes, 333);
   }, function (err) {
     alertDanger('cam error: ' + err.name);
     $('#myCamModal').modal('hide');
