@@ -13,6 +13,33 @@ pcm.panelLoaders = {};
 // -------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
   loadStore();
+//  console.log('-------------------------------------------------------------------------------------------------------------------');
+//  for (var i = 0; i < 3; i++) {
+//    var myID = makeIDCard();
+//    if (IDCardValid(myID))
+//      console.log('\tmyID  OK: ' + myID);
+//    else
+//      console.log('\tmyID BAD: ' + myID);
+//  }
+//
+//  myID = 'YJyvYHmMFvA_86e061c0';
+//  if (IDCardValid(myID))
+//    console.log('\tmyID  OK: ' + myID);
+//  else
+//    console.log('\tmyID BAD: ' + myID);
+//
+//  myID = 'YJyvYHmMFVA_86e061c0';
+//  if (IDCardValid(myID))
+//    console.log('\tmyID  OK: ' + myID);
+//  else
+//    console.log('\tmyID BAD: ' + myID);
+//
+//  myID = 'shit';
+//  if (IDCardValid(myID))
+//    console.log('\tmyID  OK: ' + myID);
+//  else
+//    console.log('\tmyID BAD: ' + myID);
+
 });
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -99,3 +126,46 @@ function login() {
   });
 }
 
+// -------------------------------------------------------------------------------------------------------------------
+// crc32 https://gist.github.com/Yaffle/1287361
+// -------------------------------------------------------------------------------------------------------------------
+function crc32(s/*, polynomial = 0x04C11DB7, initialValue = 0xFFFFFFFF, finalXORValue = 0xFFFFFFFF*/) {
+  s = String(s);
+  var polynomial = arguments.length < 2 ? 0x04C11DB7 : arguments[1],
+    initialValue = arguments.length < 3 ? 0xFFFFFFFF : arguments[2],
+    finalXORValue = arguments.length < 4 ? 0xFFFFFFFF : arguments[3],
+    crc = initialValue,
+    table = [], i, j, c;
+
+  function reverse(x, n) {
+    var b = 0;
+    while (n) {
+      b = b * 2 + x % 2;
+      x /= 2;
+      x -= x % 1;
+      n--;
+    }
+    return b;
+  }
+
+  for (i = 255; i >= 0; i--) {
+    c = reverse(i, 32);
+
+    for (j = 0; j < 8; j++) {
+      c = ((c * 2) ^ (((c >>> 31) % 2) * polynomial)) >>> 0;
+    }
+
+    table[i] = reverse(c, 32);
+  }
+
+  for (i = 0; i < s.length; i++) {
+    c = s.charCodeAt(i);
+    if (c > 255) {
+      throw new RangeError();
+    }
+    j = (crc % 256) ^ c;
+    crc = ((crc / 256) ^ table[j]) >>> 0;
+  }
+
+  return (crc ^ finalXORValue) >>> 0;
+}

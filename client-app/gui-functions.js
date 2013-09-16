@@ -120,12 +120,11 @@ function scanQRCodes() {
     decodeString = qrcode.decode();
   } catch (e) {
   }
-  if (decodeString) {
-    pcm.qrCode = decodeString;
+  if (decodeString && IDCardValid(decodeString)) {
     console.log('scanQRCodes("' + decodeString + '")');
+    pcm.qrCode = decodeString;
     window.clearInterval(pcm.qrcodeIntervalHandle);
     pcm.qrcodeIntervalHandle = undefined;
-
     $('#myCamModal').modal('hide');
     pcm.callbackTakePhoto();
     var video = document.querySelector("#videoElement");
@@ -133,7 +132,10 @@ function scanQRCodes() {
     video.src = "";
     pcm.streamTakePhone.stop();
   } else {
-    console.log('scanQRCodes()' + new Date());
+    if (decodeString)
+      console.log('scanQRCodes("' + decodeString + '") INVALID!!! ');
+    else
+      console.log('scanQRCodes() ... waiting ');
   }
 }
 

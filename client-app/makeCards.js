@@ -22,12 +22,22 @@ var print_qr = function (doc, x, y, size, text) {
   }
 };
 
-function makeid() {
+function IDCardValid(id) {
+  var pieces = id.split('_');
+  console.log('checking id: ' + JSON.stringify(pieces));
+  if (pieces.length!=2) return false;
+  var myCRC = crc32(pieces[0]).toString(16);
+  return myCRC == pieces[1];
+}
+
+function makeIDCard() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < 20; i++)
+  for (var i = 0; i < 11; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  text += '_' + crc32(text).toString(16);
+  // crc32
 
   return text;
 }
@@ -47,7 +57,7 @@ function demoTwoPageDocument() {
 function makeCards(saveToFile) {
 
   var pages = parseInt(document.getElementById('makeCardPages').value);
-  if (!pages || pages <1) {
+  if (!pages || pages < 1) {
     alertDanger('Must enter # of pages');
     return
   }
@@ -149,7 +159,7 @@ function makeCards(saveToFile) {
           pdf.text(cardLeft + 1.55, cardTop + 0.6 + (i * 0.15), 'You can put rules here if wanted.');
 
         // QR
-        var theCode = makeid();
+        var theCode = makeIDCard();
 //        console.log(theCode);
         print_qr(pdf, cardLeft + 0.2, cardTop + 0.5, 1.25, theCode);
 

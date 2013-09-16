@@ -8,6 +8,12 @@
 // -------------------------------------------------------------------------------------------------------------------
 pcm.panelLoaders.checkInPanel = function () {
 
+  var self = this;
+
+  // For storing previous visitsList
+  pcm.gotVisits = false;
+  pcm.visitsList = null;
+
   // Clear picture
   var canvas = document.querySelector("#matchPlayPicture");
   var context = canvas.getContext('2d');
@@ -16,22 +22,21 @@ pcm.panelLoaders.checkInPanel = function () {
 
   // Clear Name & Address
   document.getElementById("txtCheckInName").innerHTML = "";
-
   document.getElementById("picTitle").innerHTML = "Scan Player Card to Check In";
   $("#picSnapBtn").hide();
+
   TakePhoto({isCard: true}, function () {
     // find the member
     var searchMember = new Member();
-    var searchList = new List(searchMember);
-    var searchingFor = {qrCode: pcm.qrCode};
-    pcm.hostStore.getList(searchList, {qrCode: pcm.qrCode}, function (list, error) {
+    var searchMemberList = new List(searchMember);
+    pcm.hostStore.getList(searchMemberList, {qrCode: pcm.qrCode}, function (memberList, error) {
       if (error) {
         command('home');
-        alertDanger('Error in getList: ' + error);
+        alertDanger('Error in getList(searchMemberList: ' + error);
       } else {
-        if (list.length() > 0) {
-          list.firstItem();
-          pcm.checkInList = list;
+        if (memberList.length() > 0) {
+          memberList.firstItem();
+          pcm.checkInList = memberList;
 
           // Update picture
           var canvas = document.querySelector("#matchPlayPicture");
@@ -41,15 +46,15 @@ pcm.panelLoaders.checkInPanel = function () {
           img.onload = function () {
             context.drawImage(img, 0, 0);
           };
-          img.src = list.get('photo');
+          img.src = memberList.get('photo');
 
           // Name & Address
-          var name = list.get('name');
-          var address = list.get('address');
-          var city = list.get('city');
-          var state = list.get('state');
-          var zip = list.get('zip');
-          var phone = list.get('phone');
+          var name = memberList.get('name');
+          var address = memberList.get('address');
+          var city = memberList.get('city');
+          var state = memberList.get('state');
+          var zip = memberList.get('zip');
+          var phone = memberList.get('phone');
           var html = "";
           if (name) {
             html = "<strong>" + name + "</strong>";
@@ -65,8 +70,29 @@ pcm.panelLoaders.checkInPanel = function () {
           if (phone) {
             html += "<br>Phone: " + phone;
           }
-          document.getElementById("txtCheckInName").innerHTML = html
+          self.txtCheckInNameHTML = html;
+          document.getElementById("txtCheckInName").innerHTML = html;
 
+          // Now get visitsList
+          var searchVisits = new Visits();
+          var searchVisitsList = new List(searchVisits);
+          pcm.hostStore.getList(searchVisitsList, {MemberID: memberList.get('id')}, {visitDate: -1}, function (visitsList, error) {
+            if (error) {
+              command('home');
+              alertDanger('Error in getList(searchVisitsList: ' + error);
+            } else {
+              pcm.gotVisits = true;
+              pcm.previousTime = null;
+              pcm.visitsList = visitsList;
+              self.txtCheckInNameHTML += '<br>' + JSON.stringify(pcm.visitsList);
+              if (pcm.visitsList.length() > 0) {
+                pcm.visitsList.firstItem();
+                pcm.previousTime = pcm.visitsList.get('visitDate');
+                self.txtCheckInNameHTML += '<br><strong>Last Visit:</strong> ' + moment(pcm.previousTime).format('LLLL');
+              }
+              document.getElementById("txtCheckInName").innerHTML = self.txtCheckInNameHTML;
+            }
+          });
         } else {
           command('home');
           alertDanger('Card is not active');
@@ -87,6 +113,28 @@ function CheckInCancel() {
 // Check In
 // -------------------------------------------------------------------------------------------------------------------
 function CheckInSubmit() {
+
+  if (!pcm.gotVisits) {
+    alertDanger('Waiting for server, try again...');
+    return;
+  }
+
+  if (pcm.previousTime) {
+    var now = moment();
+    var next = moment(pcm.previousTime).add('hours',24);
+    var diff = next.diff(now,'minutes');
+    var html = document.getElementById("txtCheckInName").innerHTML;
+    html += '<br>next: ' + next.format('LLLL');
+    html += '<br>now:  ' + now.format('LLLL');
+    html += '<br>diff: ' + diff;
+    document.getElementById("txtCheckInName").innerHTML = html;
+
+    if (diff>0) {
+      alertDanger('Already checked in.  Next at: ' + next.format('LLLL'));
+      return;
+    }
+  }
+
   var name = pcm.checkInList.get('name');
   var memberID = pcm.checkInList.get('id');
 

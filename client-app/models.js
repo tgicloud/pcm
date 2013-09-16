@@ -38,5 +38,3 @@ var Visits = function (args) {
   this.attributes.push(new Attribute('MemberID','ID'));
 };
 Visits.prototype = T.inheritPrototype(Model.prototype);
-// {"qrCode" : "xIa1iSFPHhyHEuHMWTbP"}
-// {"qrCode" : "xIa1iSFPHhyHEuHMWTbp"}
