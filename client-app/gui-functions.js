@@ -19,6 +19,7 @@ function switchToPanel(panel, showHideNav) {
   var newPanel = $('#' + panel);
 
   if (newPanel.length) {
+    $('#alertSuccessDiv').hide();
     $('#alertDangerDiv').hide();
     $('#' + pcm.lastPanelShown).hide();
     pcm.lastPanelShown = panel;
@@ -40,6 +41,14 @@ function switchToPanel(panel, showHideNav) {
 function alertDanger(text) {
   $('#alertDangerDiv').show();
   $('#alertDangerText').html(text);
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+// Display alert box on top
+// -------------------------------------------------------------------------------------------------------------------
+function alertSuccess(text) {
+  $('#alertSuccessDiv').show();
+  $('#alertSuccessText').html(text);
 }
 
 // -------------------------------------------------------------------------------------------------------------------

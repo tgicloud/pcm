@@ -60,6 +60,12 @@
   <h4 id="alertDangerText" style="margin: 0px; padding: 0px;">UNKNOWN ERROR</h4>
 </div>
 
+<!-- alertSuccessDiv: for error messages -->
+<div style="display: none; margin-bottom: 4px;" class="alert alert-success" id="alertSuccessDiv">
+  <button type="button" onclick="$('#alertSuccessDiv').hide()" class="close" aria-hidden="true">&times;</button>
+  <h4 id="alertSuccessText" style="margin: 0px; padding: 0px;">UNKNOWN ERROR</h4>
+</div>
+
 <!-- loadingPanel: Loading Panel -->
 <div class="container" id="loadingPanel">
   <h4 style="display: block; text-align: center;">Loading...</h4>
@@ -244,8 +250,8 @@
 
     <div class="form-group">
       <div class="col-lg-offset-3 col-lg-6">
-        <button type="button" onclick="memberSubmit();" class="btn btn-primary">Check In</button>
-        <button type="button" onclick="memberCancel();" class="btn ">Cancel</button>
+        <button type="button" onclick="CheckInSubmit();" class="btn btn-primary">Check In</button>
+        <button type="button" onclick="CheckInCancel();" class="btn ">Cancel</button>
         <!--<button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm">NEW</button>-->
       </div>
     </div>

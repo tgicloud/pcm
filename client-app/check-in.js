@@ -31,7 +31,7 @@ pcm.panelLoaders.checkInPanel = function () {
       } else {
         if (list.length() > 0) {
           list.firstItem();
-          alertDanger('Name ' + list.get('name'));
+          pcm.checkInList = list;
 
           // Update picture
           var canvas = document.querySelector("#matchPlayPicture");
@@ -75,3 +75,32 @@ pcm.panelLoaders.checkInPanel = function () {
     });
   });
 };
+
+// -------------------------------------------------------------------------------------------------------------------
+// Cancel Check In
+// -------------------------------------------------------------------------------------------------------------------
+function CheckInCancel() {
+  command('home');
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+// Check In
+// -------------------------------------------------------------------------------------------------------------------
+function CheckInSubmit() {
+  var name = pcm.checkInList.get('name');
+  var memberID = pcm.checkInList.get('id');
+
+  var visit = new Visits();
+  visit.set('visitDate', new Date());
+  visit.set('MemberID', memberID);
+
+  pcm.hostStore.putModel(visit, function (model, error) {
+    if (typeof error != 'undefined') {
+      alertDanger('Error: ' + error);
+      return;
+    }
+    command('home');
+    alertSuccess(name + ' checked in.');
+  });
+
+}

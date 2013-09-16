@@ -30,5 +30,13 @@ var Member = function (args) {
 };
 Member.prototype = T.inheritPrototype(Model.prototype);
 
-// CheckIns
-
+// Visits
+var Visits = function (args) {
+  Model.call(this, args);
+  this.modelType = "Visits";
+  this.attributes.push(new Attribute('visitDate','Date'));
+  this.attributes.push(new Attribute('MemberID','ID'));
+};
+Visits.prototype = T.inheritPrototype(Model.prototype);
+// {"qrCode" : "xIa1iSFPHhyHEuHMWTbP"}
+// {"qrCode" : "xIa1iSFPHhyHEuHMWTbp"}
