@@ -1,7 +1,20 @@
-/*
+/* lifted from ...
  * Bootstrap Documentation
  * Special styles for presenting Bootstrap's documentation and code examples.
  */
+
+.btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.modal-footer {
+    text-align: left;
+}
+.modal-footer .btn + .btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 .the-icons {
     padding: 0px;
@@ -42,10 +55,6 @@
     /*background-color: transparent;*/
     border: 1px solid #4f4f4f;
     border-radius: 9px;
-}
-
-.modal-footer {
-    text-align: left;
 }
 
 .video-div {

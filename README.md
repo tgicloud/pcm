@@ -3,6 +3,9 @@ pcm
 
 Private Club Membership
 
+TODO
+* getlist is getting all stuff over time memory will explode - need limits in tequila
+
 * Use prototypes folder for fucking around
 for images see:
 http://blog.marcon.me/post/31143865164/send-images-through-websockets

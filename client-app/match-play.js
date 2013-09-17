@@ -1,27 +1,23 @@
 /**
  * pcm
- * check-in
+ * match-play
  */
 
 // -------------------------------------------------------------------------------------------------------------------
-// check In Panel Loader
+// match Play Panel Loader
 // -------------------------------------------------------------------------------------------------------------------
-pcm.panelLoaders.checkInPanel = function () {
+pcm.panelLoaders.matchPlayPanel = function () {
 
   var self = this;
 
-  // For storing previous visitsList
-  pcm.gotVisits = false;
-  pcm.visitsList = null;
-
   // Clear picture
-  var canvas = document.querySelector("#checkInPicture");
+  var canvas = document.querySelector("#matchPlayPicture");
   var context = canvas.getContext('2d');
   context.fillStyle = "#DDDDDD";
   context.fillRect(0, 0, 320, 240);
 
   // Clear Name & Address
-  document.getElementById("txtCheckInName").innerHTML = "";
+  document.getElementById("txtMatchPlayName").innerHTML = "";
   document.getElementById("picTitle").innerHTML = "Scan Player Card to Check In";
   $("#picSnapBtn").hide();
 
@@ -36,10 +32,10 @@ pcm.panelLoaders.checkInPanel = function () {
       } else {
         if (memberList.length() > 0) {
           memberList.firstItem();
-          pcm.checkInList = memberList;
+          pcm.matchPlayList = memberList;
 
           // Update picture
-          var canvas = document.querySelector("#checkInPicture");
+          var canvas = document.querySelector("#matchPlayPicture");
           var context = canvas.getContext('2d');
           context.fillRect(0, 0, 320, 240);
           var img = new Image;
@@ -50,33 +46,20 @@ pcm.panelLoaders.checkInPanel = function () {
 
           // Name & Address
           var name = memberList.get('name');
-          var address = memberList.get('address');
-          var city = memberList.get('city');
-          var state = memberList.get('state');
-          var zip = memberList.get('zip');
-          var phone = memberList.get('phone');
+          pcm.matchName = name;
           var html = "";
           if (name) {
             html = "<strong>" + name + "</strong>";
           } else {
             html = "<strong>No Name</strong>";
           }
-          if (address) {
-            html += "<br>" + address;
-          }
-          if (city || state || zip) {
-            html += "<br>" + city + ', ' + state + zip;
-          }
-          if (phone) {
-            html += "<br>Phone: " + phone;
-          }
-          self.txtCheckInNameHTML = html;
-          document.getElementById("txtCheckInName").innerHTML = html;
+          document.getElementById("txtMatchPlayName").innerHTML = html;
 
           // Now get visitsList
           var searchVisits = new Visits();
           var searchVisitsList = new List(searchVisits);
           pcm.hostStore.getList(searchVisitsList, {MemberID: memberList.get('id')}, {visitDate: -1}, function (visitsList, error) {
+            var html = "";
             if (error) {
               command('home');
               alertDanger('Error in getList(searchVisitsList: ' + error);
@@ -84,13 +67,21 @@ pcm.panelLoaders.checkInPanel = function () {
               pcm.gotVisits = true;
               pcm.previousTime = null;
               pcm.visitsList = visitsList;
-              self.txtCheckInNameHTML += '<br>' + JSON.stringify(pcm.visitsList);
+              // self.txtMatchPlayNameHTML += '<br>' + JSON.stringify(pcm.visitsList);
               if (pcm.visitsList.length() > 0) {
                 pcm.visitsList.firstItem();
                 pcm.previousTime = pcm.visitsList.get('visitDate');
-                self.txtCheckInNameHTML += '<br><strong>Last Visit:</strong> ' + moment(pcm.previousTime).format('LLLL');
+                pcm.previousMatch = pcm.visitsList.get('MatchAmount');
+                html += '<strong>Checked In:</strong> ' + moment(pcm.previousTime).format('LLLL');
+                if (pcm.previousMatch && pcm.previousMatch>0) {
+                  html += '<br><br><strong>Match Given:</strong> $' + pcm.previousMatch;
+                }
+                $('#txtMatchPlayDollarGroup').show();
+              } else {
+                html += '<strong>Not checked in!</strong>';
+                $('#txtMatchPlayDollarGroup').hide();
               }
-              document.getElementById("txtCheckInName").innerHTML = self.txtCheckInNameHTML;
+              document.getElementById("txtMatchPlayVisit").innerHTML = html;
             }
           });
         } else {
@@ -103,52 +94,40 @@ pcm.panelLoaders.checkInPanel = function () {
 };
 
 // -------------------------------------------------------------------------------------------------------------------
-// Cancel Check In
+// Match Amount
 // -------------------------------------------------------------------------------------------------------------------
-function CheckInCancel() {
-  command('home');
+function MatchAmount(amt) {
+  OKCancel('<h4>Name: <strong>' + pcm.matchName + '</strong><br><br>Match: <strong>' + '$' + amt + '</strong></h4', function () {
+    // Update match amount in visit
+    var visit = new Visits();
+    visit.set('id', pcm.visitsList.get('id'));
+    pcm.hostStore.getModel(visit, function (model, error) {
+      if (typeof error != 'undefined') {
+        alertDanger('Error: ' + error);
+        return;
+      }
+      var matchAmount = model.get('MatchAmount');
+      if (matchAmount && matchAmount > 0) {
+        alertDanger('Match already given!');
+        return;
+      } else {
+        model.set('MatchAmount',amt);
+        pcm.hostStore.putModel(visit, function (model, error){
+          if (typeof error != 'undefined') {
+            alertDanger('getModel Error: ' + error);
+            return;
+          }
+        });
+        command('home');
+        alertSuccess('$' + amt + ' match given to ' + pcm.matchName);
+      }
+    });
+  });
 }
 
 // -------------------------------------------------------------------------------------------------------------------
-// Check In
+// Cancel Check In
 // -------------------------------------------------------------------------------------------------------------------
-function CheckInSubmit() {
-
-  if (!pcm.gotVisits) {
-    alertDanger('Waiting for server, try again...');
-    return;
-  }
-
-  if (pcm.previousTime) {
-    var now = moment();
-    var next = moment(pcm.previousTime).add('hours',24);
-    var diff = next.diff(now,'minutes');
-    var html = document.getElementById("txtCheckInName").innerHTML;
-    html += '<br>next: ' + next.format('LLLL');
-    html += '<br>now:  ' + now.format('LLLL');
-    html += '<br>diff: ' + diff;
-    document.getElementById("txtCheckInName").innerHTML = html;
-
-    if (diff>0) {
-      alertDanger('Already checked in.  Next at: ' + next.format('LLLL'));
-      return;
-    }
-  }
-
-  var name = pcm.checkInList.get('name');
-  var memberID = pcm.checkInList.get('id');
-  var visit = new Visits();
-
-  visit.set('visitDate', new Date());
-  visit.set('MemberID', memberID);
-
-  pcm.hostStore.putModel(visit, function (model, error) {
-    if (typeof error != 'undefined') {
-      alertDanger('Error: ' + error);
-      return;
-    }
-    command('home');
-    alertSuccess(name + ' checked in.');
-  });
-
+function MatchPlayCancel() {
+  command('home');
 }

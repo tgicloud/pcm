@@ -43,6 +43,19 @@ $(document).ready(function () {
 });
 
 // -------------------------------------------------------------------------------------------------------------------
+// check In Panel Loader
+// -------------------------------------------------------------------------------------------------------------------
+pcm.panelLoaders.homePanel = function () {
+
+  var self = this;
+
+  // Clear Name & Address
+  document.getElementById("homeInfo").innerHTML = "You are logged in as <strong>"+pcm.userLogin+"</strong>." +
+    "<br><br>Select function from menu above menu.";
+
+};
+
+// -------------------------------------------------------------------------------------------------------------------
 // Load the host store
 // -------------------------------------------------------------------------------------------------------------------
 function loadStore() {
@@ -122,6 +135,7 @@ function login() {
       return;
     }
     pcm.userID = true;
+    pcm.userLogin = loginText;
     command('home');
   });
 }

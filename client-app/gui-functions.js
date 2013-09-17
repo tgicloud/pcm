@@ -39,8 +39,12 @@ function switchToPanel(panel, showHideNav) {
 // Display alert box on top
 // -------------------------------------------------------------------------------------------------------------------
 function alertDanger(text) {
-  $('#alertDangerDiv').show();
-  $('#alertDangerText').html(text);
+  if (text) {
+    $('#alertDangerDiv').show();
+    $('#alertDangerText').html(text);
+  } else {
+    $('#alertDangerDiv').hide();
+  }
 }
 
 // -------------------------------------------------------------------------------------------------------------------

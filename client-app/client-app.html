@@ -31,7 +31,7 @@
   <div id="navCollapse" class="nav-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
       <li id="newMemberNavBtn">
-        <a href="javascript:command('newMember')"><span class="glyphicon glyphicon-plus"></span> New Member</a></li>
+        <a href="javascript:command('newMember')"><span class="glyphicon glyphicon-plus">New Member</span></a></li>
       <li id="checkInNavBtn">
         <a href="javascript:command('checkIn')"><span class="glyphicon glyphicon-ok"> Check In</span></a></li>
       <li id="matchPlayNavBtn"><a href="javascript:command('matchPlay')"><span
@@ -113,16 +113,13 @@
 <!-- optionsMenuPanel: Home Screen -->
 <div style="display: none;" class="panel" id="homePanel">
   <div class="panel-heading">Home</div>
-  <div class="well well-large">Select function from menu above menu.<br><br>
-                               You are logged in as John Doe.<br><br>
-                               It's 2013. What else can I say?
+  <div id="homeInfo" class="well well-large">
   </div>
 </div>
 
 <!-- optionsMenuPanel: Add New Member -->
 <div style="display: none;" class="panel " id="newMemberPanel">
-  <!--<div style="max-width:512px" class="panel-heading">New Member</div>-->
-  <div class="panel-heading">New Member</div>
+  <div class="panel-heading"><span class="glyphicon glyphicon-plus">New Member</span></div>
   <form id="submitMember" class="form-horizontal">
 
     <div id="txtPhotoGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
@@ -218,41 +215,29 @@
 
 <!-- checkInPanel: Member Check In -->
 <div style="display: none;" class="panel" id="checkInPanel">
-  <div class="panel-heading">Check In</div>
+  <div class="panel-heading"><span class="glyphicon glyphicon-ok"> Check In</span></div>
   <form id="submitCheckIn" class="form-horizontal">
-
-    <div id="txtMatchPlayGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
-      <label for="matchPlayPicture" class="col-lg-3 control-label">Member Photo</label>
-      <div class="col-lg-5">
+    <div id="txtCheckInGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
+      <label for="checkInPicture" class="col-lg-3 control-label">Member Photo</label>
+      <div class="col-lg-4">
         <div class="well well-sm">
-          <canvas id="matchPlayPicture" class="img-responsive" width="320" height="240" style="padding:10px; border:1px solid #000000; background:#FFFFFF"></canvas>
-          <!--<button id="matchPlayBtn" type="button" onclick="TakeMatchPlay_Submit();" class="btn btn-block btn-success">Take MatchPlay</button>-->
-          <!--<span id="txtMatchPlayGroupHelp" style="display: none;" class="help-block">MatchPlay required.</span>-->
+          <canvas id="checkInPicture" class="img-responsive" width="320" height="240" style="padding:10px; border:1px solid #000000; background:#FFFFFF"></canvas>
         </div>
       </div>
     </div>
-
-    <!--<img src="img/BlankPicture.png" class="img-responsive" alt="Responsive image">-->
     <div id="txtCheckInNameGroup" class="form-group">
       <label for="txtCheckInName" class="col-lg-3 control-label">Name & Address</label>
       <div class="col-lg-7">
         <div class="well well-sm">
-        <address id="txtCheckInName" >
-          <strong>John Doe</strong><br>
-          795 Folsom Ave, Suite 600<br>
-          San Francisco, CA 94107<br>
-          Phone: (123) 456-7890<br>
-          Email: wtf@lol.com
-        </address>
+          <address id="txtCheckInName">
+          </address>
         </div>
       </div>
     </div>
-
     <div class="form-group">
       <div class="col-lg-offset-3 col-lg-6">
         <button type="button" onclick="CheckInSubmit();" class="btn btn-primary">Check In</button>
         <button type="button" onclick="CheckInCancel();" class="btn ">Cancel</button>
-        <!--<button type="button" onclick="command('newMember')" class="btn-primary btn-cell visible-sm">NEW</button>-->
       </div>
     </div>
   </form>
@@ -260,20 +245,51 @@
 
 <!-- matchPlayPanel: Match Play -->
 <div style="display: none;" class="panel" id="matchPlayPanel">
-  <div class="panel-heading">Match Play</div>
-  <form>
-
-    <legend>Personalia:</legend>
-    Name: <input class="form-control" type="text"><br>
-    Email: <input class="form-control" type="text"><br>
-    Date of birth: <input class="form-control" type="text">
-
+  <div class="panel-heading"><span class="glyphicon glyphicon-resize-small"> Match Play</span></div>
+  <form id="submitMatchPlay" class="form-horizontal">
+    <div id="txtMatchPlayGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
+      <label for="matchPlayPicture" class="col-lg-3 control-label">Member</label>
+      <div class="col-lg-4">
+        <div class="well well-sm">
+          <canvas id="matchPlayPicture" class="img-responsive" width="320" height="240" style="padding:10px; border:1px solid #000000; background:#FFFFFF"></canvas>
+          <address id="txtMatchPlayName">
+          </address>
+        </div>
+      </div>
+    </div>
+    <div id="txtMatchPlayNameGroup" class="form-group">
+      <label for="txtMatchPlayName" class="col-lg-3 control-label">Check In</label>
+      <div class="col-lg-7">
+        <div class="well well-sm">
+          <address id="txtMatchPlayVisit">
+          </address>
+        </div>
+      </div>
+    </div>
+    <div id="txtMatchPlayDollarGroup" class="form-group">
+      <label for="txtMatchPlayName" class="col-lg-3 control-label">Match Amount</label>
+      <div class="col-lg-7">
+        <div class="well well-sm">
+          <button type="button" onclick="MatchAmount(1);" class="btn btn-success btn-lg">&nbsp;$1&nbsp;</button>
+          <button type="button" onclick="MatchAmount(5);" class="btn btn-success btn-lg">&nbsp;$5&nbsp;</button>
+          <button type="button" onclick="MatchAmount(10);" class="btn btn-success btn-lg">$10&nbsp;</button>
+          <button type="button" onclick="MatchAmount(20);" class="btn btn-success btn-lg">$20&nbsp;</button>
+          <button type="button" onclick="MatchAmount(50);" class="btn btn-success btn-lg">$50&nbsp;</button>
+          <button type="button" onclick="MatchAmount(100);" class="btn btn-success btn-lg">$100&nbsp;</button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-6">
+        <button type="button" onclick="MatchPlayCancel();" class="btn ">Cancel</button>
+      </div>
+    </div>
   </form>
 </div>
 
 <!-- viewMemberPanel: View Member -->
 <div style="display: none;" class="panel" id="viewMemberPanel">
-  <div class="panel-heading">View Member</div>
+  <div class="panel-heading"><span class="glyphicon glyphicon-user"> View Member</span></div>
   <div class="form-horizontal">
 
     <table class="table table-hover table-bordered">
@@ -448,6 +464,7 @@
   <script src="gui-functions.js"></script>
   <script src="member-form.js"></script>
   <script src="check-in.js"></script>
+  <script src="match-play.js"></script>
 </div>
 </body>
 </html>

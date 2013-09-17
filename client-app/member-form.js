@@ -97,10 +97,9 @@ function TakePhoto_Submit(args) {
           alertDanger('Error in getList: ' + error);
         } else {
           if (list.length() > 0) {
-            console.log('wt');
-            alertDanger('shitz used dude');
+            alertDanger('That card is already in use!');
           } else {
-            console.log('fuck');
+            alertDanger();
             pcm.gotCard = true;
             $("#txtCardGroup").removeClass("has-error");
             $("#txtCardHelp").hide();

@@ -36,5 +36,6 @@ var Visits = function (args) {
   this.modelType = "Visits";
   this.attributes.push(new Attribute('visitDate','Date'));
   this.attributes.push(new Attribute('MemberID','ID'));
+  this.attributes.push(new Attribute('MatchAmount','Number'));
 };
 Visits.prototype = T.inheritPrototype(Model.prototype);
