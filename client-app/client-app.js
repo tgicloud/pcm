@@ -97,18 +97,18 @@ function login() {
     return;
   }
 
-  // Add to store for now
-  var loginModel = new Login();
-  loginModel.set('name', loginText);
-  loginModel.set('password', passwordText);
-  pcm.hostStore.putModel(loginModel, function (model, error) {
-    if (typeof error != 'undefined') {
-      alertDanger('Error: ' + error);
-      return;
-    }
-    pcm.userID = true;
-    command('home');
-  });
+//  // Add to store for now
+//  var loginModel = new Login();
+//  loginModel.set('name', loginText);
+//  loginModel.set('password', passwordText);
+//  pcm.hostStore.putModel(loginModel, function (model, error) {
+//    if (typeof error != 'undefined') {
+//      alertDanger('Error: ' + error);
+//      return;
+//    }
+//    pcm.userID = true;
+//    command('home');
+//  });
 
   // Search store for user
   var loginList = new List(new Login());
