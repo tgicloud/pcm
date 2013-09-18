@@ -2,6 +2,15 @@
  * pcm
  * models
  */
+  
+// SysApp
+var SysApp = function (args) {
+  Model.call(this, args);
+  this.modelType = "SysApp";
+  this.attributes.push(new Attribute('appID'));
+  this.attributes.push(new Attribute('storeInitDate','Date'));
+};
+SysApp.prototype = T.inheritPrototype(Model.prototype);
 
 // Login
 var Login = function (args) {

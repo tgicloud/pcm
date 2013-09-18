@@ -35,7 +35,8 @@ var server = http.listen(Port, function () {
 var Connections = []; // Array of connections
 var io = require('socket.io').listen(server);
 
-console.log(JSON.stringify(T.getVersion()));
+console.log('T.getVersion(' + T.getVersion() + ')');
+
 
 // try to create a mongoStore
 var mongo = require('mongodb');
@@ -47,9 +48,66 @@ mongoStore.onConnect('http://localhost', function (store, err) {
   } else {
     console.log('mongoStore connected');
     hostStore = mongoStore; // use mongoDB for hostStore
+
+    // See if app has been installed
+    hostStore.getList(new List(new SysApp()), [], function (list, error) {
+      if (typeof error != 'undefined') {
+        console.log('Error getting SysApp...\n', JSON.stringify(error));
+        return;
+      }
+      if (list._items.length < 1)
+        initializeDataStore();
+      else {
+        list.firstItem();
+        getSysApp(list.get('id'));
+      }
+    });
   }
   console.log(hostStore.name + ' ' + hostStore.storeType);
 });
+
+// Initialize Data Store
+function initializeDataStore() {
+  console.log('Initializing DataStore');
+  sysApp.set('appID', 'pcm');
+  sysApp.set('storeInitDate', new Date());
+  hostStore.putModel(sysApp, function (model, error) {
+    if (typeof error != 'undefined') {
+      console.log('Error Initializing DataStore...\n', JSON.stringify(error));
+      return;
+    }
+    getSysApp(model.get('id'));
+  });
+
+  // default login
+  var login = new Login();
+  login.set('name','crown');
+  login.set('password','Keepout!');
+  hostStore.putModel(login, function (model, error) {
+    if (typeof error != 'undefined') {
+      console.log('Error creating default account...\n', JSON.stringify(error));
+      return;
+    }
+  });
+
+}
+
+// Load SysApp object
+var sysApp = new SysApp();
+function getSysApp(id) {
+  console.log('getting sysApp ' + id);
+  sysApp.set('id', id)
+  hostStore.getModel(sysApp, function (model, error) {
+    if (typeof error != 'undefined') {
+      console.log('Error getting sysApp...\n', JSON.stringify(error));
+      return;
+    }
+    if (sysApp.get('appID') == 'pcm')
+      console.log('INIT: ok...............');
+    else
+      console.log('INIT: fail.............');
+  });
+}
 
 //io.set('log level', 1);
 io.set('log', false);
