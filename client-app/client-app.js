@@ -83,8 +83,8 @@ function loadStore() {
 
   // var httpURL = document.location.origin; //TODO: This does not work in firefox
 
-  console.log('connecting to hostStore: ' + document.location.origin)
-  pcm.hostStore.onConnect('http://localhost', function (store, err) {
+  console.log('connecting to hostStore: ' + document.location.origin);
+  pcm.hostStore.onConnect(document.location.origin, function (store, err) {
     if (err) {
       console.warn('hostStore unavailable (' + err + ')');
       storeLoadCallback(false);
