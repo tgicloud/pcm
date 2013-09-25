@@ -21,14 +21,30 @@ for (k in interfaces) {
   }
 }
 
-// Start up HTTP server (http)
+//// Start up HTTP server (http)
+//var version = "0.1";
+//var ServerName = "PCM";
+//var IP = addresses[0];
+//var Port = 8080;
+//var http = require('http').createServer(app);
+//var server = http.listen(Port, function () {
+//  console.log(ServerName + '\nVersion ' + version + '\nAddress: http://' + IP + ':' + Port);
+//});
+
+// Start up HTTPS server (https)
 var version = "0.1";
 var ServerName = "PCM";
 var IP = addresses[0];
 var Port = 8080;
-var http = require('http').createServer(app);
-var server = http.listen(Port, function () {
-  console.log(ServerName + '\nVersion ' + version + '\nAddress: http://' + IP + ':' + Port);
+var http = require('https');
+var fs = require('fs');
+var options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
+var httpServer = http.createServer(options,app);
+var server = httpServer.listen(Port, function () {
+  console.log(ServerName + '\nVersion ' + version + '\nAddress: https://' + IP + ':' + Port + '/client-app.html');
 });
 
 // Start up Socket Server (io)
