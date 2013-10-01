@@ -9,6 +9,7 @@ var SysApp = function (args) {
   this.modelType = "SysApp";
   this.attributes.push(new Attribute('appID'));
   this.attributes.push(new Attribute('storeInitDate','Date'));
+  this.attributes.push(new Attribute('maxMatch','Number'));
 };
 SysApp.prototype = T.inheritPrototype(Model.prototype);
 
@@ -18,8 +19,25 @@ var Login = function (args) {
   this.modelType = "Login";
   this.attributes.push(new Attribute('name'));
   this.attributes.push(new Attribute('password'));
+  this.attributes.push(new Attribute('GroupID','ID'));
 };
 Login.prototype = T.inheritPrototype(Model.prototype);
+
+// Group
+var Group = function (args) {
+  Model.call(this, args);
+  this.modelType = "Group";
+  this.attributes.push(new Attribute('name'));
+  this.attributes.push(new Attribute('cellAccess','Boolean'));
+  this.attributes.push(new Attribute('wsAccess','Boolean'));
+  this.attributes.push(new Attribute('canAddWithoutPhoto','Boolean'));
+  this.attributes.push(new Attribute('canAddMember','Boolean'));
+  this.attributes.push(new Attribute('canSetMatch','Boolean'));
+  this.attributes.push(new Attribute('canSearchMember','Boolean'));
+  this.attributes.push(new Attribute('canCheckIn','Boolean'));
+  this.attributes.push(new Attribute('canMatchPlay','Boolean'));
+};
+Group.prototype = T.inheritPrototype(Model.prototype);
 
 // Member
 var Member = function (args) {
@@ -32,6 +50,7 @@ var Member = function (args) {
   this.attributes.push(new Attribute('zip'));
   this.attributes.push(new Attribute('phone'));
   this.attributes.push(new Attribute('DOB','Date'));
+  this.attributes.push(new Attribute('dateAdded','Date'));
   this.attributes.push(new Attribute('email'));
   this.attributes.push(new Attribute('maxMatch','Number'));
   this.attributes.push(new Attribute('qrCode'));

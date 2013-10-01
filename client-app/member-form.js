@@ -61,6 +61,7 @@ function memberSubmit() {
   memberModel.set('email', document.getElementById("txtEmail").value);
   memberModel.set('maxMatch', document.getElementById("txtMaxMatch").value);
   memberModel.set('name', document.getElementById("txtName").value);
+  memberModel.set('dateAdded', new Date());
   memberModel.set('qrCode', pcm.qrCode);
   memberModel.set('photo', pcm.dataURL);
 
@@ -151,20 +152,13 @@ function clearNewMemberForm() {
   document.getElementById("newMemberPhotoBtn").innerHTML = "Take Photo";
   document.getElementById("newMemberCardBtn").setAttribute("class", "btn btn-block btn-warning");
   document.getElementById("newMemberCardBtn").innerHTML = "Scan New Card";
-
   $("#txtPhotoGroup").removeClass("has-error");
   $("#txtPhotoGroupHelp").hide();
-
   $("#txtCardGroup").removeClass("has-error");
   $("#txtCardHelp").hide();
-
   $("#txtNameGroup").removeClass("has-error");
   $("#txtNameHelp").hide();
-
   $("#newMemberPhoto").hide();
-
-  //$('#alertDangerText').html(text);
-
   document.getElementById("txtName").value = "";
   document.getElementById("txtAddress").value = "";
   document.getElementById("txtCity").value = "";

@@ -21,7 +21,7 @@ pcm.panelLoaders.checkInPanel = function () {
   context.fillRect(0, 0, 320, 240);
 
   // Clear Name & Address
-  document.getElementById("txtCheckInName").innerHTML = "";
+  document.getElementById("txtCheckInNameInfo").innerHTML = "";
   document.getElementById("picTitle").innerHTML = "Scan Player Card to Check In";
   $("#picSnapBtn").hide();
 
@@ -48,32 +48,21 @@ pcm.panelLoaders.checkInPanel = function () {
           };
           img.src = memberList.get('photo');
 
-          // Name & Address
+          // Name & Info
           var name = memberList.get('name');
           var address = memberList.get('address');
           var city = memberList.get('city');
           var state = memberList.get('state');
           var zip = memberList.get('zip');
           var phone = memberList.get('phone');
-          var html = "";
-          if (name) {
-            html = "<strong>" + name + "</strong>";
-          } else {
-            html = "<strong>No Name</strong>";
-          }
-          if (address) {
-            html += "<br>" + address;
-          }
-          if (city || state || zip) {
-            html += "<br>" + city + ', ' + state + zip;
-          }
-          if (phone) {
-            html += "<br>Phone: " + phone;
-          }
-          self.txtCheckInNameHTML = html;
-          document.getElementById("txtCheckInName").innerHTML = html;
+          var html = name ? "<strong>" + name + "</strong>" : "<strong>No Name</strong>";
+          if (address) html += "<br>" + address;
+          if (city || state || zip) html += city + ', ' + state + zip;
+          if (phone) html += "<br>Phone: " + phone;
+          document.getElementById("txtCheckInNameInfo").innerHTML = html;
 
           // Now get visitsList
+          html = "";
           var searchVisits = new Visits();
           var searchVisitsList = new List(searchVisits);
           pcm.hostStore.getList(searchVisitsList, {MemberID: memberList.get('id')}, {visitDate: -1}, function (visitsList, error) {
@@ -84,13 +73,13 @@ pcm.panelLoaders.checkInPanel = function () {
               pcm.gotVisits = true;
               pcm.previousTime = null;
               pcm.visitsList = visitsList;
-              self.txtCheckInNameHTML += '<br>' + JSON.stringify(pcm.visitsList);
+              html += '<br>' + JSON.stringify(pcm.visitsList);
               if (pcm.visitsList.length() > 0) {
                 pcm.visitsList.firstItem();
                 pcm.previousTime = pcm.visitsList.get('visitDate');
-                self.txtCheckInNameHTML += '<br><strong>Last Visit:</strong> ' + moment(pcm.previousTime).format('LLLL');
+                html += '<br><strong>Last Visit:</strong> ' + moment(pcm.previousTime).format('LLLL');
               }
-              document.getElementById("txtCheckInName").innerHTML = self.txtCheckInNameHTML;
+              document.getElementById("txtCheckInNameShiz").innerHTML = html;
             }
           });
         } else {
@@ -121,15 +110,15 @@ function CheckInSubmit() {
 
   if (pcm.previousTime) {
     var now = moment();
-    var next = moment(pcm.previousTime).add('hours',24);
-    var diff = next.diff(now,'minutes');
+    var next = moment(pcm.previousTime).add('hours', 24);
+    var diff = next.diff(now, 'minutes');
     var html = document.getElementById("txtCheckInName").innerHTML;
     html += '<br>next: ' + next.format('LLLL');
     html += '<br>now:  ' + now.format('LLLL');
     html += '<br>diff: ' + diff;
     document.getElementById("txtCheckInName").innerHTML = html;
 
-    if (diff>0) {
+    if (diff > 0) {
       alertDanger('Already checked in.  Next at: ' + next.format('LLLL'));
       return;
     }

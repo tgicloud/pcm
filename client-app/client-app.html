@@ -31,7 +31,7 @@
   <div id="navCollapse" class="nav-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
       <li id="newMemberNavBtn">
-        <a href="javascript:command('newMember')"><span class="glyphicon glyphicon-plus">New Member</span></a></li>
+        <a href="javascript:command('newMember')"><span class="glyphicon glyphicon-plus"> New Member</span></a></li>
       <li id="checkInNavBtn">
         <a href="javascript:command('checkIn')"><span class="glyphicon glyphicon-ok"> Check In</span></a></li>
       <li id="matchPlayNavBtn"><a href="javascript:command('matchPlay')"><span
@@ -43,6 +43,9 @@
                 class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="javascript:command('makeCards')">Print Member Cards</a></li>
+          <li><a href="javascript:command('systemConfig')">System Config</a></li>
+          <li><a href="javascript:command('userList')">User List</a></li>
+          <li><a href="javascript:command('groupList')">Group List</a></li>
         </ul>
       </li>
     </ul>
@@ -218,19 +221,21 @@
   <div class="panel-heading"><span class="glyphicon glyphicon-ok"> Check In</span></div>
   <form id="submitCheckIn" class="form-horizontal">
     <div id="txtCheckInGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
-      <label for="checkInPicture" class="col-lg-3 control-label">Member Photo</label>
+      <label for="checkInPicture" class="col-lg-3 control-label">Member</label>
       <div class="col-lg-4">
         <div class="well well-sm">
           <canvas id="checkInPicture" class="img-responsive" width="320" height="240" style="padding:10px; border:1px solid #000000; background:#FFFFFF"></canvas>
+          <small id="txtCheckInNameInfo">
+          </small>
         </div>
       </div>
     </div>
     <div id="txtCheckInNameGroup" class="form-group">
-      <label for="txtCheckInName" class="col-lg-3 control-label">Name & Address</label>
+      <label for="txtCheckInNameShiz" class="col-lg-3 control-label">Match</label>
       <div class="col-lg-7">
         <div class="well well-sm">
-          <address id="txtCheckInName">
-          </address>
+          <small id="txtCheckInNameShiz">
+          </small>
         </div>
       </div>
     </div>
@@ -360,8 +365,147 @@
   </button>
 </div>
 
-<!-- Button trigger modal -->
-<!--<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Launch demo modal</a>-->
+<!-- systemConfigPanel: System Config -->
+<div style="display: none;" class="panel" id="systemConfigPanel">
+  <div class="panel-heading">System Config</div>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="txtConfigMaxMatch" class="col-lg-1 control-label">Match</label>
+      <div class="col-lg-2">
+        <input type="number" min="5" max="100" step="5" class="form-control" id="txtConfigMaxMatch" placeholder="maximum">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-6">
+        <button type="button" onclick="systemConfigSubmit();" class="btn btn-primary">Save Setting</button>
+        <button type="button" onclick="systemConfigCancel();" class="btn ">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- userListPanel: User List -->
+<div style="display: none;" class="panel" id="userListPanel">
+  <div class="panel-heading"><span class="glyphicon glyphicon-user"> User List</span></div>
+  <div id="userList">
+    <button type="button" style="text-align: left" onclick="presentUser(1)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> crown</button>
+    <button type="button" style="text-align: left" onclick="presentUser(2)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> sean</button>
+    <button type="button" style="text-align: left" onclick="presentUser(3)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> hal</button>
+    <button type="button" style="text-align: left" onclick="presentUser()" class="btn btn-success btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-plus-sign"></span> Add new users</button>
+  </div>
+</div>
+
+<!-- User Modal -->
+<div class="modal fade" id="userListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">User Info</h4>
+      </div>
+      <div id="userListmodalBody" class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="loginName" class="col-lg-2 control-label">Name</label>
+            <div class="col-lg-5">
+              <input id="loginName" type="text" class="form-control" placeholder="login name" required>
+              <span id="loginNameHelp" style="display: none;" class="help-block">Name is required.</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword" class="col-lg-2 control-label">Password</label>
+            <div class="col-lg-5">
+              <input id="loginPassword" type="password" class="form-control" placeholder="password" required>
+              <span id="loginPasswordHelp" style="display: none;" class="help-block">Password is required.</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="loginGroup" class="col-lg-2 control-label">Group</label>
+            <div class="col-lg-10">
+              <select id="loginGroup" class="form-control">
+                <option>Security1</option>
+                <option>Attendant</option>
+              </select>
+              <span id="loginGroupHelp" style="display: none;" class="help-block">Groyp is required.</span>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="OKCancel_OK();" class="btn btn-primary">OK</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- groupListPanel: Group List -->
+<div style="display: none;" class="panel" id="groupListPanel">
+  <div class="panel-heading"><span class="glyphicon glyphicon-Group"> Group List</span></div>
+  <div id="groupList">
+  <button type="button" style="text-align: left" onclick="presentGroup(1)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> security</button>
+  <button type="button" style="text-align: left" onclick="presentGroup(2)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> attendant</button>
+  <button type="button" style="text-align: left" onclick="presentGroup()" class="btn btn-success btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-plus-sign"></span> Add new group</button>
+  </div>
+</div>
+
+<!-- Group Modal -->
+<div class="modal fade" id="groupListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Group Info</h4>
+      </div>
+      <div id="GroupListmodalBody" class="modal-body">
+        <form class="form-horizontal">
+          <div id="groupGroup" class="form-group">
+            <label for="groupName" class="col-lg-2 control-label">Name</label>
+            <div class="col-lg-5">
+              <input id="groupName" type="text" class="form-control" placeholder="group name" required>
+              <span id="groupNameHelp" style="display: none;" class="help-block">Name is required.</span>
+            </div>
+          </div>
+            <label for="groupName" class="col-lg-2 control-label">Permissions</label>
+            <br><br>
+            <div class="well well-sm">
+              <label class="checkbox">
+                <input type="checkbox" id="cellAccess" value="option1"> Cell Access
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" id="wsAccess" value="option1"> Workstation Access
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" id="canAddWithoutPhoto" value="option1"> Can Add Without Photo
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" id="canAddMember" value="option1"> Can Add Member
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" id="canSetMatch" value="option1"> Can Set Match
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" id="canSearchMember" value="option1"> Can Search Member
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" id="canCheckIn" value="option1"> Can Check In
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" id="canMatchPlay" value="option1"> Can Match Play
+              </label>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="groupSubmit();" class="btn btn-primary">OK</button>
+        <button type="button" onclick="groupDelete();" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -376,14 +520,9 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
-<!-- Button trigger modal -->
-<!--<a data-toggle="modal" href="#myCamModal" class="btn btn-primary btn-lg">Launch demo modal</a>-->
 <!-- Modal for cam pictures-->
 <div class="modal fade" id="myCamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -406,12 +545,8 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
-
 
 </div>
 
@@ -465,6 +600,9 @@
   <script src="member-form.js"></script>
   <script src="check-in.js"></script>
   <script src="match-play.js"></script>
+  <script src="group-list.js"></script>
+  <script src="system-config.js"></script>
+  <script src="user-list.js"></script>
 </div>
 </body>
 </html>

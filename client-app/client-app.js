@@ -7,6 +7,8 @@ var pcm = {};
 pcm.lastPanelShown = "loadingPanel";
 pcm.userID = null;
 pcm.panelLoaders = {};
+pcm.loadingHTML = '<h4 style="display: block; text-align: center;">Loading...</h4><img style="display: block; margin-left: auto; margin-right: auto;" src="img/ajax-loader.gif">';
+pcm.app = {};
 
 // -------------------------------------------------------------------------------------------------------------------
 // Entry point when document ready
@@ -94,6 +96,35 @@ function loadStore() {
     }
   });
 
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+// Load App
+// -------------------------------------------------------------------------------------------------------------------
+function loadApp(callback) {
+  // Search store for user
+  var sysAppList = new List(new SysApp());
+  pcm.hostStore.getList(sysAppList, {appID: 'pcm'}, function (sysAppList, error) {
+    if (typeof error != 'undefined') {
+      callback(error);
+      return;
+    }
+    if (sysAppList.length() < 1) {
+      callback(new Error('Cannot load app record.'));
+      return;
+    }
+    sysAppList.firstItem();
+    pcm.app = new SysApp();
+    pcm.app.set('ID',sysAppList.get('ID'));
+    // pcm.hostStore.getModel()
+    pcm.hostStore.getModel(pcm.app, function (model, error) {
+      if (typeof error != 'undefined') {
+        callback(new Error('Cannot load app record.'));
+        return;
+      }
+      callback(); // done no errors
+    });
+  });
 }
 
 // -------------------------------------------------------------------------------------------------------------------
