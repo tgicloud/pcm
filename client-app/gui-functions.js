@@ -73,7 +73,38 @@ function OKCancel_OK() {
 // Execute commands
 // -------------------------------------------------------------------------------------------------------------------
 function command(cmd) {
-  switchToPanel(cmd + "Panel", true);
+  console.log('command switch ... ' + cmd);
+
+  var canDoIt = false;
+  if (pcm.userLogin == 'crown') {
+    canDoIt = true;
+  } else {
+    switch (cmd) {
+      case 'newMember':
+        canDoIt = pcm.userGroupModel.get('canAddMember');
+        break;
+
+      case 'checkIn':
+        canDoIt = pcm.userGroupModel.get('canCheckIn');
+        break;
+
+      case 'matchPlay':
+        canDoIt = pcm.userGroupModel.get('canMatchPlay');
+        break;
+
+      case 'viewMember':
+        canDoIt = pcm.userGroupModel.get('canViewMember');
+        break;
+
+      case 'home':
+        canDoIt = true;
+        break;
+    }
+  }
+  if (canDoIt)
+    switchToPanel(cmd + "Panel", true);
+  else
+    alertDanger('access denied');
 }
 
 // -------------------------------------------------------------------------------------------------------------------

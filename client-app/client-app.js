@@ -6,6 +6,7 @@
 var pcm = {};
 pcm.lastPanelShown = "loadingPanel";
 pcm.userID = null;
+pcm.isBrowser = true;
 pcm.panelLoaders = {};
 pcm.loadingHTML = '<h4 style="display: block; text-align: center;">Loading...</h4><img style="display: block; margin-left: auto; margin-right: auto;" src="img/ajax-loader.gif">';
 pcm.app = {};
@@ -52,7 +53,7 @@ pcm.panelLoaders.homePanel = function () {
   var self = this;
 
   // Clear Name & Address
-  document.getElementById("homeInfo").innerHTML = "You are logged in as <strong>"+pcm.userLogin+"</strong>." +
+  document.getElementById("homeInfo").innerHTML = "You are logged in as <strong>" + pcm.userLogin + "</strong>." +
     "<br><br>Select function from menu above menu.";
 
 };
@@ -115,7 +116,7 @@ function loadApp(callback) {
     }
     sysAppList.firstItem();
     pcm.app = new SysApp();
-    pcm.app.set('ID',sysAppList.get('ID'));
+    pcm.app.set('ID', sysAppList.get('ID'));
     // pcm.hostStore.getModel()
     pcm.hostStore.getModel(pcm.app, function (model, error) {
       if (typeof error != 'undefined') {
@@ -145,19 +146,6 @@ function login() {
     return;
   }
 
-//  // Add to store for now
-//  var loginModel = new Login();
-//  loginModel.set('name', loginText);
-//  loginModel.set('password', passwordText);
-//  pcm.hostStore.putModel(loginModel, function (model, error) {
-//    if (typeof error != 'undefined') {
-//      alertDanger('Error: ' + error);
-//      return;
-//    }
-//    pcm.userID = true;
-//    command('home');
-//  });
-
   // Search store for user
   var loginList = new List(new Login());
   pcm.hostStore.getList(loginList, {name: loginText, password: passwordText}, function (list, error) {
@@ -169,10 +157,38 @@ function login() {
       alertDanger('login failed');
       return;
     }
-    pcm.userID = true;
-    pcm.userLogin = loginText;
-    command('home');
+    list.firstItem();
+    getuserGroupModel(list.get('GroupID'), function (groupModel,error) {
+      if (typeof error != 'undefined') {
+        alertDanger(error);
+        return;
+      }
+      if (pcm.isBrowser && !groupModel.get('wsAccess')) {
+        alertDanger('access failed');
+        return;
+      }
+      pcm.userID = true;
+      pcm.userLogin = loginText;
+      pcm.userGroupModel = groupModel;
+      command('home');
+    });
   });
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+// Get User Group Model for loginid
+// -------------------------------------------------------------------------------------------------------------------
+function getuserGroupModel(id, callback) {
+  var group = new Group();
+  group.set('id',id);
+
+  pcm.hostStore.getModel(group, function(model,error){
+    if (typeof error != 'undefined') {
+      callback(null,error);
+    }
+    callback(model);
+  });
+
 }
 
 // -------------------------------------------------------------------------------------------------------------------
