@@ -84,10 +84,13 @@ function loadStore() {
   // try to create a hostStore
   pcm.hostStore = new RemoteStore({name: 'PCM Store'});
 
-  // var httpURL = document.location.origin; //TODO: This does not work in firefox
-
-  console.log('connecting to hostStore: ' + document.location.origin);
-  pcm.hostStore.onConnect(document.location.origin, function (store, err) {
+  var httpURL = document.location.origin; //TODO: This does not work in firefox
+  // https://192.168.1.85:8080/client-app.html
+// httpURL = 'http://' + localStorage.serverIP + ':8080/';
+  // https://192.168.1.85:8080
+  httpURL = 'https://192.168.1.85:8080';
+  console.log('connecting to hostStore: ' + httpURL);
+  pcm.hostStore.onConnect(httpURL, function (store, err) {
     if (err) {
       console.warn('hostStore unavailable (' + err + ')');
       storeLoadCallback(false);
