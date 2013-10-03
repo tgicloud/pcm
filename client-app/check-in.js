@@ -17,6 +17,13 @@ pcm.panelLoaders.checkInPanel = function () {
   document.getElementById("matchBtn50").className = "btn btn-default btn-lg";
   document.getElementById("matchBtn100").className = "btn btn-default btn-lg";
 
+  document.getElementById("matchBtn1").style.visibility="hidden";
+  document.getElementById("matchBtn5").style.visibility="hidden";
+  document.getElementById("matchBtn10").style.visibility="hidden";
+  document.getElementById("matchBtn20").style.visibility="hidden";
+  document.getElementById("matchBtn50").style.visibility="hidden";
+  document.getElementById("matchBtn100").style.visibility="hidden";
+
   // For storing previous visitsList
   pcm.gotVisits = false;
   pcm.visitsList = null;
@@ -60,14 +67,24 @@ pcm.panelLoaders.checkInPanel = function () {
           pcm.checkInName = name;
           var address = memberList.get('address');
           var city = memberList.get('city');
-          var state = memberList.get('state');
+          var state = memberList.get('state') + ' ';
           var zip = memberList.get('zip');
           var phone = memberList.get('phone');
           var html = name ? "<strong>" + name + "</strong>" : "<strong>No Name</strong>";
           if (address) html += "<br>" + address;
-          if (city || state || zip) html += city + ', ' + state + zip;
+          if (city || state || zip) html += "<br>" + city + ', ' + state + zip;
           if (phone) html += "<br>Phone: " + phone;
           document.getElementById("txtCheckInNameInfo").innerHTML = html;
+
+          /// Set max match
+          var maxMatchAmount = 50;
+          if (maxMatchAmount>=1) document.getElementById("matchBtn1").style.visibility="";
+          if (maxMatchAmount>=5) document.getElementById("matchBtn5").style.visibility="";
+          if (maxMatchAmount>=10) document.getElementById("matchBtn10").style.visibility="";
+          if (maxMatchAmount>=20) document.getElementById("matchBtn20").style.visibility="";
+          if (maxMatchAmount>=50) document.getElementById("matchBtn50").style.visibility="";
+          if (maxMatchAmount>=100) document.getElementById("matchBtn100").style.visibility="";
+
 
           // Now get visitsList
           html = "";
@@ -91,7 +108,6 @@ pcm.panelLoaders.checkInPanel = function () {
                   match = "btn btn-success btn-lg";
 
                 var MatchAmount = pcm.visitsList.get('MatchAmount');
-
                 switch (MatchAmount) {
                   case 1:
                     document.getElementById("matchBtn1").className = match;
@@ -134,49 +150,49 @@ function CheckInCancel() {
   command('home');
 }
 
-// -------------------------------------------------------------------------------------------------------------------
-// Check In
-// -------------------------------------------------------------------------------------------------------------------
-function CheckInSubmit() {
-
-  if (!pcm.gotVisits) {
-    alertDanger('Waiting for server, try again...');
-    return;
-  }
-
-  if (pcm.previousTime) {
-    var now = moment();
-    var next = moment(pcm.previousTime).add('hours', 24);
-    var diff = next.diff(now, 'minutes');
-    var html = document.getElementById("txtCheckInName").innerHTML;
-    html += '<br>next: ' + next.format('LLLL');
-    html += '<br>now:  ' + now.format('LLLL');
-    html += '<br>diff: ' + diff;
-    document.getElementById("txtCheckInName").innerHTML = html;
-
-    if (diff > 0) {
-      alertDanger('Already checked in.  Next at: ' + next.format('LLLL'));
-      return;
-    }
-  }
-
-  var name = pcm.checkInList.get('name');
-  var memberID = pcm.checkInList.get('id');
-  var visit = new Visits();
-
-  visit.set('visitDate', new Date());
-  visit.set('MemberID', memberID);
-
-  pcm.hostStore.putModel(visit, function (model, error) {
-    if (typeof error != 'undefined') {
-      alertDanger('Error: ' + error);
-      return;
-    }
-    command('home');
-    alertSuccess(name + ' checked in.');
-  });
-
-}
+//// -------------------------------------------------------------------------------------------------------------------
+//// Check In
+//// -------------------------------------------------------------------------------------------------------------------
+//function CheckInSubmit() {
+//
+//  if (!pcm.gotVisits) {
+//    alertDanger('Waiting for server, try again...');
+//    return;
+//  }
+//
+//  if (pcm.previousTime) {
+//    var now = moment();
+//    var next = moment(pcm.previousTime).add('hours', 24);
+//    var diff = next.diff(now, 'minutes');
+//    var html = document.getElementById("txtCheckInName").innerHTML;
+//    html += '<br>next: ' + next.format('LLLL');
+//    html += '<br>now:  ' + now.format('LLLL');
+//    html += '<br>diff: ' + diff;
+//    document.getElementById("txtCheckInName").innerHTML = html;
+//
+//    if (diff > 0) {
+//      alertDanger('Already checked in.  Next at: ' + next.format('LLLL'));
+//      return;
+//    }
+//  }
+//
+//  var name = pcm.checkInList.get('name');
+//  var memberID = pcm.checkInList.get('id');
+//  var visit = new Visits();
+//
+//  visit.set('visitDate', new Date());
+//  visit.set('MemberID', memberID);
+//
+//  pcm.hostStore.putModel(visit, function (model, error) {
+//    if (typeof error != 'undefined') {
+//      alertDanger('Error: ' + error);
+//      return;
+//    }
+//    command('home');
+//    alertSuccess(name + ' checked in.');
+//  });
+//
+//}
 
 // -------------------------------------------------------------------------------------------------------------------
 // Check In Match
@@ -197,7 +213,7 @@ function CheckInMatch(amt) {
 //      html += '<br>diff: ' + diff;
 //      document.getElementById("txtCheckInNameShiz").innerHTML = html;
       if (diff > 0) {
-        alertDanger('Already checked in.  Next at: ' + next.format('LLLL'));
+        alertDanger('Match already given!');
         return;
       }
     }

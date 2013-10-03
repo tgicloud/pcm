@@ -155,20 +155,27 @@ function login() {
       return;
     }
     list.firstItem();
-    getuserGroupModel(list.get('GroupID'), function (groupModel,error) {
-      if (typeof error != 'undefined') {
-        alertDanger(error);
-        return;
-      }
-      if (pcm.isBrowser && !groupModel.get('wsAccess')) {
-        alertDanger('access failed');
-        return;
-      }
-      pcm.userID = true;
-      pcm.userLogin = loginText;
-      pcm.userGroupModel = groupModel;
-      command('home');
-    });
+
+    var userGroupID = list.get('GroupID');
+    if (!userGroupID) {
+      alertDanger('login group invalid');
+      return;
+    } else {
+      getuserGroupModel(userGroupID, function (groupModel, error) {
+        if (typeof error != 'undefined') {
+          alertDanger(error);
+          return;
+        }
+        if (pcm.isBrowser && !groupModel.get('wsAccess')) {
+          alertDanger('access to workstation not permitted');
+          return;
+        }
+        pcm.userID = true;
+        pcm.userLogin = loginText;
+        pcm.userGroupModel = groupModel;
+        command('home');
+      });
+    }
   });
 }
 
@@ -177,11 +184,11 @@ function login() {
 // -------------------------------------------------------------------------------------------------------------------
 function getuserGroupModel(id, callback) {
   var group = new Group();
-  group.set('id',id);
+  group.set('id', id);
 
-  pcm.hostStore.getModel(group, function(model,error){
+  pcm.hostStore.getModel(group, function (model, error) {
     if (typeof error != 'undefined') {
-      callback(null,error);
+      callback(null, error);
     }
     callback(model);
   });
