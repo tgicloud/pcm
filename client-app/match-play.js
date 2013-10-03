@@ -72,11 +72,19 @@ pcm.panelLoaders.matchPlayPanel = function () {
                 pcm.visitsList.firstItem();
                 pcm.previousTime = pcm.visitsList.get('visitDate');
                 pcm.previousMatch = pcm.visitsList.get('MatchAmount');
-                html += '<strong>Checked In:</strong> ' + moment(pcm.previousTime).format('LLLL');
-                if (pcm.previousMatch && pcm.previousMatch>0) {
-                  html += '<br><br><strong>Match Given:</strong> $' + pcm.previousMatch;
+
+                var now = moment();
+                var prev = moment(pcm.previousTime);
+                if (now.format('L') == prev.format('L')  && pcm.visitsList.get('MatchGiven')  ) {
+                  html += '<strong>Match given</strong>';
+                  $('#txtMatchPlayDollarGroup').hide();
+                } else {
+                  html += '<strong>Checked In:</strong> ' + moment(pcm.previousTime).format('LLLL');
+                  if (pcm.previousMatch && pcm.previousMatch>0) {
+                    html += '<br><br><strong>Match Amount:</strong> $' + pcm.previousMatch;
+                  }
+                  $('#txtMatchPlayDollarGroup').show();
                 }
-                $('#txtMatchPlayDollarGroup').show();
               } else {
                 html += '<strong>Not checked in!</strong>';
                 $('#txtMatchPlayDollarGroup').hide();
@@ -96,8 +104,8 @@ pcm.panelLoaders.matchPlayPanel = function () {
 // -------------------------------------------------------------------------------------------------------------------
 // Match Amount
 // -------------------------------------------------------------------------------------------------------------------
-function MatchAmount(amt) {
-  OKCancel('<h4>Name: <strong>' + pcm.matchName + '</strong><br><br>Match: <strong>' + '$' + amt + '</strong></h4', function () {
+function GiveMatch() {
+  OKCancel('<h4>Name: <strong>' + pcm.matchName + '</strong><br><br>Match: <strong>' + '$' + pcm.previousMatch + '</strong></h4', function () {
     // Update match amount in visit
     var visit = new Visits();
     visit.set('id', pcm.visitsList.get('id'));
@@ -107,11 +115,12 @@ function MatchAmount(amt) {
         return;
       }
       var matchAmount = model.get('MatchAmount');
-      if (matchAmount && matchAmount > 0) {
+      if (model.get('MatchGiven')) {
         alertDanger('Match already given!');
         return;
       } else {
-        model.set('MatchAmount',amt);
+//        model.set('MatchAmount',amt);
+        model.set('MatchGiven',true);
         pcm.hostStore.putModel(visit, function (model, error){
           if (typeof error != 'undefined') {
             alertDanger('getModel Error: ' + error);
@@ -119,7 +128,7 @@ function MatchAmount(amt) {
           }
         });
         command('home');
-        alertSuccess('$' + amt + ' match given to ' + pcm.matchName);
+        alertSuccess('$' + matchAmount + ' match given to ' + pcm.matchName);
       }
     });
   });

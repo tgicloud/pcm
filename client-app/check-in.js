@@ -10,6 +10,13 @@ pcm.panelLoaders.checkInPanel = function () {
 
   var self = this;
 
+  document.getElementById("matchBtn1").className = "btn btn-default btn-lg";
+  document.getElementById("matchBtn5").className = "btn btn-default btn-lg";
+  document.getElementById("matchBtn10").className = "btn btn-default btn-lg";
+  document.getElementById("matchBtn20").className = "btn btn-default btn-lg";
+  document.getElementById("matchBtn50").className = "btn btn-default btn-lg";
+  document.getElementById("matchBtn100").className = "btn btn-default btn-lg";
+
   // For storing previous visitsList
   pcm.gotVisits = false;
   pcm.visitsList = null;
@@ -50,6 +57,7 @@ pcm.panelLoaders.checkInPanel = function () {
 
           // Name & Info
           var name = memberList.get('name');
+          pcm.checkInName = name;
           var address = memberList.get('address');
           var city = memberList.get('city');
           var state = memberList.get('state');
@@ -73,12 +81,40 @@ pcm.panelLoaders.checkInPanel = function () {
               pcm.gotVisits = true;
               pcm.previousTime = null;
               pcm.visitsList = visitsList;
-              html += '<br>' + JSON.stringify(pcm.visitsList);
+//              html += '<br>' + JSON.stringify(pcm.visitsList);
               if (pcm.visitsList.length() > 0) {
                 pcm.visitsList.firstItem();
                 pcm.previousTime = pcm.visitsList.get('visitDate');
-                html += '<br><strong>Last Visit:</strong> ' + moment(pcm.previousTime).format('LLLL');
+
+                var match = "btn btn-info btn-lg";
+                if (pcm.visitsList.get('MatchGiven'))
+                  match = "btn btn-success btn-lg";
+
+                var MatchAmount = pcm.visitsList.get('MatchAmount');
+
+                switch (MatchAmount) {
+                  case 1:
+                    document.getElementById("matchBtn1").className = match;
+                    break;
+                  case 5:
+                    document.getElementById("matchBtn5").className = match;
+                    break;
+                  case 10:
+                    document.getElementById("matchBtn10").className = match;
+                    break;
+                  case 20:
+                    document.getElementById("matchBtn20").className = match;
+                    break;
+                  case 50:
+                    document.getElementById("matchBtn50").className = match;
+                    break;
+                  case 100:
+                    document.getElementById("matchBtn100").className = match;
+                    break;
+                }
+                html += '<strong>Last Visit:</strong> ' + moment(pcm.previousTime).format('LLLL') + '<br>';
               }
+//              html += '<br>';
               document.getElementById("txtCheckInNameShiz").innerHTML = html;
             }
           });
@@ -140,4 +176,72 @@ function CheckInSubmit() {
     alertSuccess(name + ' checked in.');
   });
 
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+// Check In Match
+// -------------------------------------------------------------------------------------------------------------------
+function CheckInMatch(amt) {
+  OKCancel('<h4>Name: <strong>' + pcm.checkInName + '</strong><br><br>Match: <strong>' + '$' + amt + '</strong></h4', function () {
+    if (!pcm.gotVisits) {
+      alertDanger('Waiting for server, try again...');
+      return;
+    }
+    if (pcm.previousTime) {
+      var now = moment();
+      var next = moment(pcm.previousTime).add('hours', 24);
+      var diff = next.diff(now, 'minutes');
+//      var html = document.getElementById("txtCheckInNameShiz").innerHTML;
+//      html += '<br>next: ' + next.format('LLLL');
+//      html += '<br>now:  ' + now.format('LLLL');
+//      html += '<br>diff: ' + diff;
+//      document.getElementById("txtCheckInNameShiz").innerHTML = html;
+      if (diff > 0) {
+        alertDanger('Already checked in.  Next at: ' + next.format('LLLL'));
+        return;
+      }
+    }
+    var name = pcm.checkInList.get('name');
+    var memberID = pcm.checkInList.get('id');
+    var visit = new Visits();
+    visit.set('visitDate', new Date());
+    visit.set('MemberID', memberID);
+    visit.set('MatchAmount',amt);
+    visit.set('MatchGiven',false);
+    pcm.hostStore.putModel(visit, function (model, error) {
+      if (typeof error != 'undefined') {
+        alertDanger('Error: ' + error);
+        return;
+      }
+      command('home');
+      alertSuccess(name + ' checked in for $' + amt + ' match.');
+    });
+
+//    // Update match amount in visit
+//    var visit = new Visits();
+//    visit.set('id', pcm.visitsList.get('id'));
+//    pcm.hostStore.getModel(visit, function (model, error) {
+//      if (typeof error != 'undefined') {
+//        alertDanger('Error: ' + error);
+//        return;
+//      }
+//      var matchAmount = model.get('MatchAmount');
+//      if (matchAmount && matchAmount > 0) {
+//        alertDanger('Match already given!');
+//        return;
+//      } else {
+//        model.set('MatchAmount',amt);
+//        pcm.hostStore.putModel(visit, function (model, error){
+//          if (typeof error != 'undefined') {
+//            alertDanger('getModel Error: ' + error);
+//            return;
+//          }
+//        });
+//        command('home');
+//        alertSuccess('$' + amt + ' match given to ' + pcm.matchName);
+//      }
+//    });
+
+
+  });
 }

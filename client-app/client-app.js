@@ -133,9 +133,6 @@ function loadApp(callback) {
 // -------------------------------------------------------------------------------------------------------------------
 function login() {
 
-  // Rest any form data
-  clearNewMemberForm();
-
   // Get from html input controls
   var loginText = document.getElementById("txtLogin").value;
   var passwordText = document.getElementById("txtPassword").value;

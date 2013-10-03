@@ -3,6 +3,9 @@
  * Special styles for presenting Bootstrap's documentation and code examples.
  */
 
+.address {
+    margin-bottom: 0px;
+}
 .btn {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -73,34 +76,6 @@ body {
     padding-top: 50px; /* Account for fixed navbar */
 }
 
-/* Custom docs button */
-/*.btn-bs {*/
-    /*color: #563d7c;*/
-    /*background-color: #fff;*/
-    /*border-color: #e5e5e5;*/
-/*}*/
-/*.btn-bs:hover,*/
-/*.btn-bs:focus,*/
-/*.btn-bs:active {*/
-    /*color: #fff;*/
-    /*background-color: #563d7c;*/
-    /*border-color: #563d7c;*/
-/*}*/
-
-/* Homepage button */
-/*.btn-outline {*/
-    /*color: #fff;*/
-    /*background-color: transparent;*/
-    /*border-color: #cdbfe3;*/
-/*}*/
-/*.btn-outline:hover,*/
-/*.btn-outline:focus,*/
-/*.btn-outline:active {*/
-    /*color: #563d7c;*/
-    /*background-color: #fff;*/
-    /*border-color: #fff;*/
-/*}*/
-
 /* Temp CSS until RC2 */
 .bs-customize-placeholder {
     margin-bottom: -100px;
@@ -108,35 +83,6 @@ body {
     text-align: center;
     background-color: #f5f5f5;
 }
-
-
-/* Top nav and header
--------------------------------------------------- */
-
-/*.bs-docs-nav {*/
-    /*background-color: #563d7c;*/
-/*}*/
-/*.bs-docs-nav .navbar-brand {*/
-    /*color: #fff;*/
-/*}*/
-/*.bs-docs-nav .navbar-nav > li > a {*/
-    /*color: #cdbfe3;*/
-/*}*/
-/*.bs-docs-nav .navbar-nav > li > a:hover {*/
-    /*color: #fff;*/
-/*}*/
-/*.bs-docs-nav .navbar-nav > .active > a,*/
-/*.bs-docs-nav .navbar-nav > .active > a:hover {*/
-    /*color: #fff;*/
-    /*background-color: #463265;*/
-/*}*/
-/*.bs-docs-nav .navbar-toggle {*/
-    /*border-color: #563d7c;*/
-/*}*/
-/*.bs-docs-nav .navbar-toggle:hover {*/
-    /*background-color: #463265;*/
-    /*border-color: #463265;*/
-/*}*/
 
 /* Old docs callout */
 .bs-old-docs {

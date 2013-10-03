@@ -4,6 +4,14 @@
  */
 
 // -------------------------------------------------------------------------------------------------------------------
+// user List Panel
+// -------------------------------------------------------------------------------------------------------------------
+pcm.panelLoaders.newMemberPanel = function () {
+  // Rest any form data
+  clearNewMemberForm();
+};
+
+// -------------------------------------------------------------------------------------------------------------------
 // Submit Form
 // -------------------------------------------------------------------------------------------------------------------
 function memberSubmit() {
@@ -51,6 +59,8 @@ function memberSubmit() {
   // No errors save
   // Add to store for now
   var memberModel = new Member();
+  if (pcm.memberViewID)
+    memberModel.set('id', pcm.memberViewID);
   memberModel.set('name', document.getElementById("txtName").value);
   memberModel.set('address', document.getElementById("txtAddress").value);
   memberModel.set('city', document.getElementById("txtCity").value);
@@ -60,7 +70,6 @@ function memberSubmit() {
   memberModel.set('DOB', document.getElementById("txtDOB").value);
   memberModel.set('email', document.getElementById("txtEmail").value);
   memberModel.set('maxMatch', document.getElementById("txtMaxMatch").value);
-  memberModel.set('name', document.getElementById("txtName").value);
   memberModel.set('dateAdded', new Date());
   memberModel.set('qrCode', pcm.qrCode);
   memberModel.set('photo', pcm.dataURL);
@@ -146,6 +155,7 @@ function memberCancel() {
 // Clear Form
 // -------------------------------------------------------------------------------------------------------------------
 function clearNewMemberForm() {
+  pcm.memberViewID = null;
   pcm.gotPhoto = false;
   pcm.gotCard = false;
   document.getElementById("newMemberPhotoBtn").setAttribute("class", "btn btn-block btn-warning");
@@ -168,4 +178,10 @@ function clearNewMemberForm() {
   document.getElementById("txtDOB").value = "";
   document.getElementById("txtEmail").value = "";
   document.getElementById("txtMaxMatch").value = "";
+
+  if (pcm.userGroupModel.get('canSetMatch'))
+    $("#memberMatchDiv").show();
+  else
+    $("#memberMatchDiv").hide();
+
 }

@@ -4,6 +4,7 @@
   <title>PCM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
   <link href="css/bootstrap-glyphicons.css" rel="stylesheet">
   <link href="css/client-app.css" rel="stylesheet" media="screen">
 </head>
@@ -122,7 +123,7 @@
 
 <!-- optionsMenuPanel: Add New Member -->
 <div style="display: none;" class="panel " id="newMemberPanel">
-  <div class="panel-heading"><span class="glyphicon glyphicon-plus">New Member</span></div>
+  <div class="panel-heading"><span class="glyphicon glyphicon-user"> Member</span></div>
   <form id="submitMember" class="form-horizontal">
 
     <div id="txtPhotoGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
@@ -198,14 +199,15 @@
       <div class="col-lg-4">
         <input type="email" class="form-control" id="txtEmail" placeholder="name@site.com">
       </div>
-      <label for="txtMaxMatch" class="col-lg-1 control-label">Match</label>
 
-      <div class="col-lg-2">
-        <input type="number" min="5" max="100" step="5" class="form-control" id="txtMaxMatch" placeholder="maximum">
+      <div id="memberMatchDiv">
+        <label for="txtMaxMatch" class="col-lg-1 control-label">Match</label>
+
+        <div class="col-lg-2">
+          <input type="number" min="5" max="100" step="5" class="form-control" id="txtMaxMatch" placeholder="maximum">
+        </div>
       </div>
     </div>
-
-
     <div class="form-group">
       <div class="col-lg-offset-3 col-lg-6">
         <button type="button" onclick="memberSubmit();" class="btn btn-primary">Save Member</button>
@@ -222,6 +224,7 @@
   <form id="submitCheckIn" class="form-horizontal">
     <div id="txtCheckInGroup" class="form-group" style="margin-bottom:0; margin-top:0; padding-bottom:0; padding-top:0">
       <label for="checkInPicture" class="col-lg-3 control-label">Member</label>
+
       <div class="col-lg-4">
         <div class="well well-sm">
           <canvas id="checkInPicture" class="img-responsive" width="320" height="240" style="padding:10px; border:1px solid #000000; background:#FFFFFF"></canvas>
@@ -232,17 +235,17 @@
     </div>
     <div id="txtCheckInNameGroup" class="form-group">
       <label for="txtCheckInNameShiz" class="col-lg-3 control-label">Match</label>
+
       <div class="col-lg-7">
         <div class="well well-sm">
-          <small id="txtCheckInNameShiz">
-          </small>
+          <h4 id="txtCheckInNameShiz"></h4>
+          <button id="matchBtn1" type="button" onclick="CheckInMatch(1);" class="btn btn-default btn-lg">&nbsp;$1&nbsp;</button>
+          <button id="matchBtn5" type="button" onclick="CheckInMatch(5);" class="btn btn-default btn-lg">&nbsp;$5&nbsp;</button>
+          <button id="matchBtn10" type="button" onclick="CheckInMatch(10);" class="btn btn-default btn-lg">$10&nbsp;</button>
+          <button id="matchBtn20" type="button" onclick="CheckInMatch(20);" class="btn btn-default btn-lg">$20&nbsp;</button>
+          <button id="matchBtn50" type="button" onclick="CheckInMatch(50);" class="btn btn-default btn-lg">$50&nbsp;</button>
+          <button id="matchBtn100" type="button" onclick="CheckInMatch(100);" class="btn btn-default btn-lg">$100&nbsp;</button>
         </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-lg-offset-3 col-lg-6">
-        <button type="button" onclick="CheckInSubmit();" class="btn btn-primary">Check In</button>
-        <button type="button" onclick="CheckInCancel();" class="btn ">Cancel</button>
       </div>
     </div>
   </form>
@@ -275,18 +278,9 @@
       <label for="txtMatchPlayName" class="col-lg-3 control-label">Match Amount</label>
       <div class="col-lg-7">
         <div class="well well-sm">
-          <button type="button" onclick="MatchAmount(1);" class="btn btn-success btn-lg">&nbsp;$1&nbsp;</button>
-          <button type="button" onclick="MatchAmount(5);" class="btn btn-success btn-lg">&nbsp;$5&nbsp;</button>
-          <button type="button" onclick="MatchAmount(10);" class="btn btn-success btn-lg">$10&nbsp;</button>
-          <button type="button" onclick="MatchAmount(20);" class="btn btn-success btn-lg">$20&nbsp;</button>
-          <button type="button" onclick="MatchAmount(50);" class="btn btn-success btn-lg">$50&nbsp;</button>
-          <button type="button" onclick="MatchAmount(100);" class="btn btn-success btn-lg">$100&nbsp;</button>
+          <button type="button" onclick="GiveMatch();" class="btn btn-success btn-lg">Match&nbsp;</button>
+          <button type="button" onclick="MatchPlayCancel();" class="btn btn-default btn-lg">Cancel</button>
         </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-lg-offset-3 col-lg-6">
-        <button type="button" onclick="MatchPlayCancel();" class="btn ">Cancel</button>
       </div>
     </div>
   </form>
@@ -294,36 +288,16 @@
 
 <!-- viewMemberPanel: View Member -->
 <div style="display: none;" class="panel" id="viewMemberPanel">
+
   <div class="panel-heading"><span class="glyphicon glyphicon-user"> View Member</span></div>
-  <div class="form-horizontal">
-
-    <table class="table table-hover table-bordered">
-      <thead>
-      <tr>
-        <th>#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr onclick="login()">
-        <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr onclick="login()">
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      </tbody>
-    </table>
-
+  <div id="memberList">
+    <button type="button" style="text-align: left" onclick="presentMember(1)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> Moe
+    </button>
+    <button type="button" style="text-align: left" onclick="presentMember(2)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> Larry
+    </button>
+    <button type="button" style="text-align: left" onclick="presentMember(3)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> Curly
+    </button>
   </div>
-  <!-- /example -->
 </div>
 
 <!-- makeCardsPanel: Make Player Cards -->
@@ -371,6 +345,7 @@
   <form class="form-horizontal">
     <div class="form-group">
       <label for="txtConfigMaxMatch" class="col-lg-1 control-label">Match</label>
+
       <div class="col-lg-2">
         <input type="number" min="5" max="100" step="5" class="form-control" id="txtConfigMaxMatch" placeholder="maximum">
       </div>
@@ -388,10 +363,14 @@
 <div style="display: none;" class="panel" id="userListPanel">
   <div class="panel-heading"><span class="glyphicon glyphicon-user"> User List</span></div>
   <div id="userList">
-    <button type="button" style="text-align: left" onclick="presentUser(1)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> crown</button>
-    <button type="button" style="text-align: left" onclick="presentUser(2)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> sean</button>
-    <button type="button" style="text-align: left" onclick="presentUser(3)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> hal</button>
-    <button type="button" style="text-align: left" onclick="presentUser()" class="btn btn-success btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-plus-sign"></span> Add new users</button>
+    <button type="button" style="text-align: left" onclick="presentUser(1)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> crown
+    </button>
+    <button type="button" style="text-align: left" onclick="presentUser(2)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> sean
+    </button>
+    <button type="button" style="text-align: left" onclick="presentUser(3)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> hal
+    </button>
+    <button type="button" style="text-align: left" onclick="presentUser()" class="btn btn-success btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-plus-sign"></span> Add new users
+    </button>
   </div>
 </div>
 
@@ -407,6 +386,7 @@
         <form class="form-horizontal">
           <div class="form-group">
             <label for="loginName" class="col-lg-2 control-label">Name</label>
+
             <div class="col-lg-5">
               <input id="loginName" type="text" class="form-control" placeholder="login name" required>
               <span id="loginNameHelp" style="display: none;" class="help-block">Name is required.</span>
@@ -414,6 +394,7 @@
           </div>
           <div class="form-group">
             <label for="loginPassword" class="col-lg-2 control-label">Password</label>
+
             <div class="col-lg-5">
               <input id="loginPassword" type="password" class="form-control" placeholder="password" required>
               <span id="loginPasswordHelp" style="display: none;" class="help-block">Password is required.</span>
@@ -421,6 +402,7 @@
           </div>
           <div class="form-group">
             <label for="loginGroup" class="col-lg-2 control-label">Group</label>
+
             <div class="col-lg-10">
               <select id="loginGroup" class="form-control">
                 <option>Security1</option>
@@ -445,9 +427,12 @@
 <div style="display: none;" class="panel" id="groupListPanel">
   <div class="panel-heading"><span class="glyphicon glyphicon-Group"> Group List</span></div>
   <div id="groupList">
-  <button type="button" style="text-align: left" onclick="presentGroup(1)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> security</button>
-  <button type="button" style="text-align: left" onclick="presentGroup(2)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> attendant</button>
-  <button type="button" style="text-align: left" onclick="presentGroup()" class="btn btn-success btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-plus-sign"></span> Add new group</button>
+    <button type="button" style="text-align: left" onclick="presentGroup(1)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> security
+    </button>
+    <button type="button" style="text-align: left" onclick="presentGroup(2)" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> attendant
+    </button>
+    <button type="button" style="text-align: left" onclick="presentGroup()" class="btn btn-success btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-plus-sign"></span> Add new group
+    </button>
   </div>
 </div>
 
@@ -463,39 +448,41 @@
         <form class="form-horizontal">
           <div id="groupGroup" class="form-group">
             <label for="groupName" class="col-lg-2 control-label">Name</label>
+
             <div class="col-lg-5">
               <input id="groupName" type="text" class="form-control" placeholder="group name" required>
               <span id="groupNameHelp" style="display: none;" class="help-block">Name is required.</span>
             </div>
           </div>
-            <label for="groupName" class="col-lg-2 control-label">Permissions</label>
-            <br><br>
-            <div class="well well-sm">
-              <label class="checkbox">
-                <input type="checkbox" id="cellAccess" value="option1"> Cell Access
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" id="wsAccess" value="option1"> Workstation Access
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" id="canAddWithoutPhoto" value="option1"> Can Add Without Photo
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" id="canAddMember" value="option1"> Can Add Member
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" id="canSetMatch" value="option1"> Can Set Match
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" id="canSearchMember" value="option1"> Can Search Member
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" id="canCheckIn" value="option1"> Can Check In
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" id="canMatchPlay" value="option1"> Can Match Play
-              </label>
-            </div>
+          <label for="groupName" class="col-lg-2 control-label">Permissions</label>
+          <br><br>
+
+          <div class="well well-sm">
+            <label class="checkbox">
+              <input type="checkbox" id="cellAccess" value="option1"> Cell Access
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="wsAccess" value="option1"> Workstation Access
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="canAddWithoutPhoto" value="option1"> Can Add Without Photo
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="canAddMember" value="option1"> Can Add Member
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="canSetMatch" value="option1"> Can Set Match
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="canSearchMember" value="option1"> Can Search Member
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="canCheckIn" value="option1"> Can Check In
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="canMatchPlay" value="option1"> Can Match Play
+            </label>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -599,11 +586,13 @@
   <script src="client-app.js"></script>
   <script src="gui-functions.js"></script>
   <script src="member-form.js"></script>
+  <script src="view-member.js"></script>
   <script src="check-in.js"></script>
   <script src="match-play.js"></script>
   <script src="group-list.js"></script>
   <script src="system-config.js"></script>
   <script src="user-list.js"></script>
+
 </div>
 </body>
 </html>
