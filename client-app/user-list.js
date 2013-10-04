@@ -29,7 +29,7 @@ pcm.panelLoaders.userListPanel = function () {
             idHtml = "'" + idHtml + "'"
           html += '<button type="button" style="text-align: left" onclick="presentUser(' +
             idHtml +
-            ')" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> ' +
+            ')" class="btn btn-default btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> ' +
             loginList.get('name') +
             '</button>';
         }

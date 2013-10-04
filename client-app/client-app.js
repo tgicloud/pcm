@@ -88,7 +88,7 @@ function loadStore() {
   // https://192.168.1.85:8080/client-app.html
 // httpURL = 'http://' + localStorage.serverIP + ':8080/';
   // https://192.168.1.85:8080
-  httpURL = 'https://192.168.1.85:8080';
+//  httpURL = 'https://192.168.1.85:8080'; todo ...
   console.log('connecting to hostStore: ' + httpURL);
   pcm.hostStore.onConnect(httpURL, function (store, err) {
     if (err) {

@@ -14,7 +14,7 @@ pcm.panelLoaders.newMemberPanel = function () {
 // -------------------------------------------------------------------------------------------------------------------
 // Submit Form
 // -------------------------------------------------------------------------------------------------------------------
-function memberSubmit() {
+function memberSubmit(forceSubmit) {
 
   var gotErrors = false;
 
@@ -33,24 +33,30 @@ function memberSubmit() {
     nameHelp.show();
   }
 
-  // Photo is required
-  if (!pcm.gotPhoto) {
-    gotErrors = true;
-    $("#txtPhotoGroup").addClass("has-error");
-    $("#txtPhotoGroupHelp").show();
-  } else {
-    $("#txtPhotoGroup").removeClass("has-error");
-    $("#txtPhotoGroupHelp").hide();
-  }
-
   // Card is required
-  if (!pcm.gotCard) {
+  if (!forceSubmit && !pcm.gotCard) {
     gotErrors = true;
     $("#txtCardGroup").addClass("has-error");
     $("#txtCardHelp").show();
   } else {
     $("#txtCardGroup").removeClass("has-error");
     $("#txtCardHelp").hide();
+  }
+
+  // Photo is required
+  if (!forceSubmit && !pcm.gotPhoto) {
+    $("#txtPhotoGroup").addClass("has-error");
+    $("#txtPhotoGroupHelp").show();
+    if (!gotErrors && pcm.userGroupModel.get('canAddWithoutPhoto')) {
+      OKCancel('Are you SURE you want to add without Photo?', function () {
+        memberSubmit(true);
+      });
+      return;
+    }
+    gotErrors = true;
+  } else {
+    $("#txtPhotoGroup").removeClass("has-error");
+    $("#txtPhotoGroupHelp").hide();
   }
 
   // Any errors leave
@@ -74,7 +80,6 @@ function memberSubmit() {
   memberModel.set('qrCode', pcm.qrCode);
   memberModel.set('photo', pcm.dataURL);
 
-  //pcm.qrCode
   pcm.hostStore.putModel(memberModel, function (model, error) {
     if (typeof error != 'undefined') {
       alertDanger('Error: ' + error);
@@ -93,7 +98,6 @@ function memberSubmit() {
 // -------------------------------------------------------------------------------------------------------------------
 function TakePhoto_Submit(args) {
   args = args || {};
-
   if (args.isCard) {
     document.getElementById("picTitle").innerHTML = "Scan New Player Card";
     $("#picSnapBtn").hide();
@@ -183,5 +187,4 @@ function clearNewMemberForm() {
     $("#memberMatchDiv").show();
   else
     $("#memberMatchDiv").hide();
-
 }

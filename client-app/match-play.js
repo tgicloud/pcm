@@ -18,7 +18,7 @@ pcm.panelLoaders.matchPlayPanel = function () {
 
   // Clear Name & Address
   document.getElementById("txtMatchPlayName").innerHTML = "";
-  document.getElementById("picTitle").innerHTML = "Scan Player Card to Check In";
+  document.getElementById("picTitle").innerHTML = "Scan Player Card to Match";
   $("#picSnapBtn").hide();
 
   TakePhoto({isCard: true}, function () {

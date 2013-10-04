@@ -28,7 +28,7 @@ pcm.panelLoaders.groupListPanel = function () {
             idHtml = "'" + idHtml + "'";
           html += '<button type="button" style="text-align: left" onclick="presentGroup(' +
             idHtml +
-            ')" class="btn btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> ' +
+            ')" class="btn btn-default btn-block">&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> ' +
             groupList.get('name') +
             '</button>';
         }
